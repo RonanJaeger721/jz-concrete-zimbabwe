@@ -31,7 +31,7 @@ export default function Home() {
   const [width, setWidth] = useState("8");
   const [depth, setDepth] = useState("0.15");
   useEffect(() => {
-    const gateTimer = window.setTimeout(() => setGateOpen(true), 1700);
+    const gateTimer = window.setTimeout(() => setGateOpen(true), 2200);
     const nodes = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add("revealed");
@@ -47,9 +47,15 @@ export default function Home() {
   return (
     <main>
       <button className={gateOpen ? "gate-sequence gate-open" : "gate-sequence"} onClick={() => setGateOpen(true)} aria-label="Skip opening animation">
-        <span className="gate-panel gate-left"><i /><b>JIANZHOU</b></span>
-        <span className="gate-panel gate-right"><i /><b>CONCRETE</b></span>
-        <span className="gate-lock"><img src="/jz/logo-clean.jpeg" alt="" /><small>ENGINEERED TO OPEN</small></span>
+        <span className="gate-assembly">
+          <i className="assembly-piece piece-a"><b>01</b></i>
+          <i className="assembly-piece piece-b"><b>02</b></i>
+          <i className="assembly-piece piece-c"><b>03</b></i>
+          <i className="assembly-piece piece-d"><b>04</b></i>
+          <span className="assembly-cross"><i /><i /></span>
+          <span className="gate-lock"><img src="/jz/logo-clean.jpeg" alt="" /><small>JIANZHOU CONCRETE</small></span>
+        </span>
+        <span className="assembly-caption"><b>ASSEMBLING</b> / PRODUCTION · QUALITY · LOGISTICS · FIELD</span>
         <span className="gate-progress"><i /></span>
         <span className="gate-skip">Click to skip</span>
       </button>
@@ -74,7 +80,7 @@ export default function Home() {
         <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero-copy">
           <p className="eyebrow"><i /> Concrete infrastructure platform</p>
-          <h1>WE DON’T<br />JUST POUR.<br /><em>WE POWER<br />PROGRESS.</em></h1>
+          <h1><span className="hero-word word-one">WE DON’T</span><span className="hero-word word-two">JUST POUR.</span><em><span className="hero-word word-three">WE POWER</span><span className="hero-word word-four">PROGRESS.</span></em></h1>
           <p className="hero-lede">J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.</p>
           <div className="hero-actions">
             <a className="primary" href="#quote">Request a quote <span>→</span></a>
