@@ -69,20 +69,24 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <img className="hero-image" src="/jz/plant.jpeg" alt="J Z Concrete batching plant in Zimbabwe" />
-        <div className="hero-shade" />
-        <div className="blueprint" aria-hidden="true" />
+        <div className="hero-mast"><span>JIANZHOU / ZIMBABWE</span><span>READY-MIX INFRASTRUCTURE</span><span>CONTROL SYSTEM 01</span></div>
+        <div className="hero-visual"><img className="hero-image" src="/jz/plant.jpeg" alt="J Z Concrete batching plant in Zimbabwe" /><div className="hero-shade" /><div className="plant-tag"><i /> BATCHING PLANT<br /><b>PRODUCTION ONLINE</b></div></div>
+        <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero-copy">
-          <p className="eyebrow"><i /> Ready-mix concrete · Zimbabwe</p>
-          <h1>Building Zimbabwe’s<br /><em>future.</em></h1>
-          <p className="hero-lede">International engineering discipline. Intelligent production. Reliable delivery. Technical support from mix design to final pour.</p>
+          <p className="eyebrow"><i /> Concrete infrastructure platform</p>
+          <h1>WE DON’T<br />JUST POUR.<br /><em>WE POWER<br />PROGRESS.</em></h1>
+          <p className="hero-lede">J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.</p>
           <div className="hero-actions">
             <a className="primary" href="#quote">Request a quote <span>→</span></a>
             <a className="text-link" href="#calculator">Calculate volume <span>↓</span></a>
           </div>
         </div>
-        <div className="hero-index"><span>01</span><div /><small>ENGINEERED<br />TO PERFORM</small></div>
-        <div className="hero-rail"><span>Quality controlled</span><span>Dispatch ready</span><span>Technical support</span></div>
+        <div className="command-stack">
+          <article><small>PRODUCTION</small><b>INTELLIGENT</b><span><i /> ACTIVE</span></article>
+          <article><small>LABORATORY</small><b>CONTROLLED</b><span><i /> VERIFIED</span></article>
+          <article><small>DISPATCH</small><b>COORDINATED</b><span><i /> READY</span></article>
+        </div>
+        <div className="hero-rail"><span>01 — Production</span><span>02 — Quality</span><span>03 — Logistics</span><span>04 — Placement</span><b>SCROLL TO ENTER ↓</b></div>
       </section>
 
       <section className="statement reveal" id="capability">
@@ -91,6 +95,17 @@ export default function Home() {
         <div className="statement-grid">
           <p>We approach every cubic metre as engineered infrastructure—not a commodity. Materials, moisture, mix, movement and placement are managed as one connected system.</p>
           <a href="#quality">Explore quality control <span>↗</span></a>
+        </div>
+      </section>
+
+      <section className="operations-theatre reveal">
+        <div className="ops-stage">
+          <div className="ops-copy"><p className="section-tag">/ One connected operation</p><h2>PLANT.<br />LAB.<br />FLEET.<br /><span>FIELD.</span></h2><p>A concrete supply chain designed as one continuous engineering system—from raw material verification to the final placed structure.</p></div>
+          <div className="ops-orbit" aria-hidden="true"><i /><i /><i /><i /></div>
+          <figure className="ops-photo ops-plant"><img src="/jz/plant.jpeg" alt="J Z batching facility" /><figcaption>01 / PRODUCE</figcaption></figure>
+          <figure className="ops-photo ops-fleet"><img src="/jz/fleet-line.jpeg" alt="J Z concrete mixer fleet" /><figcaption>03 / MOBILISE</figcaption></figure>
+          <figure className="ops-photo ops-lab"><img src="/jz/slump.jpeg" alt="Concrete laboratory testing" /><figcaption>02 / VERIFY</figcaption></figure>
+          <div className="ops-axis"><span>RAW MATERIAL</span><i /><span>STRUCTURE</span></div>
         </div>
       </section>
 
