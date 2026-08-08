@@ -29,7 +29,17 @@ export default function Home() {
   const [gateOpen, setGateOpen] = useState(false);
   const [length, setLength] = useState("10");
   const [width, setWidth] = useState("8");
-  const [depth, setDepth] = useState("0.15");
+  const [depth, setDepth] = useState("150");
+  const [quantity, setQuantity] = useState("1");
+  const [allowance, setAllowance] = useState("5");
+  const [contactName, setContactName] = useState("");
+  const [projectType, setProjectType] = useState("Commercial building");
+  const [projectLocation, setProjectLocation] = useState("");
+  const [concreteGrade, setConcreteGrade] = useState("C25");
+  const [requiredDate, setRequiredDate] = useState("");
+  const [replyMode, setReplyMode] = useState("WhatsApp");
+  const [contactValue, setContactValue] = useState("");
+  const [destination, setDestination] = useState("sales");
   useEffect(() => {
     const gateTimer = window.setTimeout(() => setGateOpen(true), 2200);
     const nodes = document.querySelectorAll(".reveal");
@@ -40,9 +50,29 @@ export default function Home() {
     return () => { observer.disconnect(); window.clearTimeout(gateTimer); };
   }, []);
   const volume = useMemo(() => {
-    const total = Number(length) * Number(width) * Number(depth);
-    return Number.isFinite(total) ? (total * 1.05).toFixed(2) : "0.00";
-  }, [length, width, depth]);
+    const base = Number(length) * Number(width) * (Number(depth) / 1000) * Number(quantity);
+    const order = base * (1 + Number(allowance) / 100);
+    return {
+      base: Number.isFinite(base) && base > 0 ? base.toFixed(2) : "0.00",
+      order: Number.isFinite(order) && order > 0 ? order.toFixed(2) : "0.00",
+    };
+  }, [length, width, depth, quantity, allowance]);
+
+  const sendEnquiry = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const number = destination === "dispatch" ? "263777003547" : "263777003039";
+    const message = [
+      "J Z Concrete website enquiry",
+      `Name: ${contactName}`,
+      `Project: ${projectType}`,
+      `Location: ${projectLocation}`,
+      `Concrete grade: ${concreteGrade}`,
+      `Estimated volume: ${volume.order} m³`,
+      `Required date: ${requiredDate || "To be confirmed"}`,
+      `Preferred reply: ${replyMode} — ${contactValue}`,
+    ].join("\n");
+    window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <main>
@@ -76,12 +106,13 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-mast"><span>JIANZHOU / ZIMBABWE</span><span>READY-MIX INFRASTRUCTURE</span><span>CONTROL SYSTEM 01</span></div>
-        <div className="hero-visual"><img className="hero-image" src="/jz/plant.jpeg" alt="J Z Concrete batching plant in Zimbabwe" /><div className="hero-shade" /><div className="plant-tag"><i /> BATCHING PLANT<br /><b>PRODUCTION ONLINE</b></div></div>
+        <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" /><div className="hero-shade" /><div className="plant-tag"><i /> J Z FLEET<br /><b>PRODUCTION ONLINE</b></div></div>
         <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero-copy">
           <p className="eyebrow"><i /> Concrete infrastructure platform</p>
           <h1><span className="hero-word word-one">WE DON’T</span><span className="hero-word word-two">JUST POUR.</span><em><span className="hero-word word-three">WE POWER</span><span className="hero-word word-four">PROGRESS.</span></em></h1>
           <p className="hero-lede">J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.</p>
+          <p className="brand-line">If it’s not <b>JZ</b>, it’s not concrete.</p>
           <div className="hero-actions">
             <a className="primary" href="#quote">Request a quote <span>→</span></a>
             <a className="text-link" href="#calculator">Calculate volume <span>↓</span></a>
@@ -155,15 +186,18 @@ export default function Home() {
       </section>
 
       <section className="calculator reveal" id="calculator">
-        <div className="calc-intro"><p className="section-tag">/ Volume calculator</p><h2>Measure twice.<br /><span>Pour once.</span></h2><p>Estimate a rectangular slab. A 5% allowance is included for handling and site variation. Final quantities should be confirmed with our technical team.</p></div>
+        <div className="calc-intro"><p className="section-tag">/ Concrete volume calculator</p><h2>Measure twice.<br /><span>Pour once.</span></h2><p>This calculator uses the exact rectangular-volume formula: length × width × thickness × quantity. Choose your allowance separately, then confirm the final order with our technical team.</p><div className="formula">V = L × W × (T ÷ 1000) × Q</div></div>
         <div className="calc-machine">
-          <div className="scan"><div className="slab"><i /></div><span>LIVE VOLUME SCAN</span></div>
+          <div className="scan"><div className="slab"><i /></div><span>RECTANGULAR SLAB / FOOTING</span></div>
           <div className="inputs">
             <label>Length <span>metres</span><input value={length} onChange={e => setLength(e.target.value)} inputMode="decimal" /></label>
             <label>Width <span>metres</span><input value={width} onChange={e => setWidth(e.target.value)} inputMode="decimal" /></label>
-            <label>Depth <span>metres</span><input value={depth} onChange={e => setDepth(e.target.value)} inputMode="decimal" /></label>
+            <label>Thickness <span>millimetres</span><input value={depth} onChange={e => setDepth(e.target.value)} inputMode="decimal" /></label>
+            <label>Identical pours <span>quantity</span><input value={quantity} onChange={e => setQuantity(e.target.value)} inputMode="numeric" /></label>
+            <label>Allowance <span>percent</span><select value={allowance} onChange={e => setAllowance(e.target.value)}><option value="0">0%</option><option value="5">5%</option><option value="10">10%</option></select></label>
           </div>
-          <div className="result"><small>ESTIMATED ORDER VOLUME</small><strong>{volume}<span>m³</span></strong><a href="#quote">Request this volume <b>→</b></a></div>
+          <div className="calc-breakdown"><span>Calculated structure volume <b>{volume.base} m³</b></span><span>Selected allowance <b>{allowance}%</b></span></div>
+          <div className="result"><small>ESTIMATED ORDER VOLUME</small><strong>{volume.order}<span>m³</span></strong><a href="#quote">Request this volume <b>→</b></a></div>
         </div>
       </section>
 
@@ -188,11 +222,27 @@ export default function Home() {
         <div className="map-links">{companyAreas.map((item, i) => <a href="#quote" key={item}><span>{String(i + 1).padStart(2,"0")}</span>{item}<b>↗</b></a>)}</div>
       </section>
 
-      <section className="quote reveal" id="quote">
-        <img src="/jz/pump.jpeg" alt="Concrete pump truck" />
-        <div className="quote-shade" />
-        <div className="quote-copy"><p className="section-tag">/ Start the conversation</p><h2>Your next pour<br />starts <em>here.</em></h2><p>Send the location, grade, estimated volume and required pour date. Our sales team will help shape the right supply plan.</p><div><a className="primary" href="https://wa.me/263777003039">WhatsApp sales <span>↗</span></a><a className="text-link light" href="tel:+263777003547">Call +263 777 003 547</a></div></div>
+      <section className="contact-suite reveal" id="quote">
+        <div className="contact-story"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /><div><p className="section-tag">/ Start the conversation</p><h2>Plan your<br />next pour.</h2><p>Choose the team you need and how you want them to reply. Submitting opens a prepared WhatsApp enquiry containing your project details.</p><p className="contact-tagline">If it’s not <b>JZ</b>, it’s not concrete.</p></div></div>
+        <form className="enquiry-form" onSubmit={sendEnquiry}>
+          <div className="form-head"><span>PROJECT ENQUIRY</span><b>01 / 03</b></div>
+          <div className="form-grid">
+            <label>Your name<input required value={contactName} onChange={e => setContactName(e.target.value)} placeholder="Full name" /></label>
+            <label>Project type<select value={projectType} onChange={e => setProjectType(e.target.value)}><option>Commercial building</option><option>Residential</option><option>Mining</option><option>Road or bridge</option><option>Industrial</option><option>Water infrastructure</option><option>Other</option></select></label>
+            <label>Project location<input required value={projectLocation} onChange={e => setProjectLocation(e.target.value)} placeholder="Site location" /></label>
+            <label>Concrete grade<select value={concreteGrade} onChange={e => setConcreteGrade(e.target.value)}><option>C15</option><option>C20</option><option>C25</option><option>C30</option><option>C35</option><option>C40+</option><option>Technical advice needed</option></select></label>
+            <label>Estimated volume<input readOnly value={`${volume.order} m³`} /></label>
+            <label>Required pour date<input type="date" value={requiredDate} onChange={e => setRequiredDate(e.target.value)} /></label>
+          </div>
+          <fieldset><legend>Send enquiry to</legend><label><input type="radio" name="destination" value="sales" checked={destination === "sales"} onChange={e => setDestination(e.target.value)} /> Sales · +263 777 003 039</label><label><input type="radio" name="destination" value="dispatch" checked={destination === "dispatch"} onChange={e => setDestination(e.target.value)} /> Dispatch · +263 777 003 547</label></fieldset>
+          <fieldset><legend>How should J Z reply?</legend>{["WhatsApp", "Phone call", "Email"].map(mode => <label key={mode}><input type="radio" name="reply" value={mode} checked={replyMode === mode} onChange={e => setReplyMode(e.target.value)} /> {mode}</label>)}</fieldset>
+          <label className="reply-detail">Your {replyMode === "Email" ? "email address" : "phone number"}<input required type={replyMode === "Email" ? "email" : "tel"} value={contactValue} onChange={e => setContactValue(e.target.value)} placeholder={replyMode === "Email" ? "name@company.com" : "+263 …"} /></label>
+          <button className="submit-enquiry" type="submit"><span>Prepare enquiry</span><b>Open WhatsApp ↗</b></button>
+          <small>Nothing is sent automatically. You can review the prepared message before sending it.</small>
+        </form>
       </section>
+
+      <a className="whatsapp-dock" href="https://wa.me/263777003039" target="_blank" rel="noreferrer" aria-label="Chat with J Z Concrete on WhatsApp"><i>WA</i><span>WhatsApp<br /><b>Sales online</b></span></a>
 
       <footer>
         <div className="footer-brand"><img src="/jz/logo-clean.jpeg" alt="" /><h2>J Z CONCRETE</h2><p>Building Zimbabwe’s future with international engineering excellence.</p></div>
