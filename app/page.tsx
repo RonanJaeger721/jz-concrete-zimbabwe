@@ -26,7 +26,7 @@ const companyAreas = ["About Jianzhou", "Why choose J Z", "Production facilities
 
 export default function Home() {
   const [menu, setMenu] = useState(false);
-  const [gateOpen, setGateOpen] = useState(false);
+  const [entered, setEntered] = useState(false);
   const [length, setLength] = useState("10");
   const [width, setWidth] = useState("8");
   const [depth, setDepth] = useState("150");
@@ -41,13 +41,13 @@ export default function Home() {
   const [contactValue, setContactValue] = useState("");
   const [destination, setDestination] = useState("sales");
   useEffect(() => {
-    const gateTimer = window.setTimeout(() => setGateOpen(true), 2200);
+    const entranceTimer = window.setTimeout(() => setEntered(true), 80);
     const nodes = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add("revealed");
     }), { threshold: 0.12 });
     nodes.forEach(node => observer.observe(node));
-    return () => { observer.disconnect(); window.clearTimeout(gateTimer); };
+    return () => { observer.disconnect(); window.clearTimeout(entranceTimer); };
   }, []);
   const volume = useMemo(() => {
     const base = Number(length) * Number(width) * (Number(depth) / 1000) * Number(quantity);
@@ -75,20 +75,7 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <button className={gateOpen ? "gate-sequence gate-open" : "gate-sequence"} onClick={() => setGateOpen(true)} aria-label="Skip opening animation">
-        <span className="gate-assembly">
-          <i className="assembly-piece piece-a"><b>01</b></i>
-          <i className="assembly-piece piece-b"><b>02</b></i>
-          <i className="assembly-piece piece-c"><b>03</b></i>
-          <i className="assembly-piece piece-d"><b>04</b></i>
-          <span className="assembly-cross"><i /><i /></span>
-          <span className="gate-lock"><img src="/jz/logo-clean.jpeg" alt="" /><small>JIANZHOU CONCRETE</small></span>
-        </span>
-        <span className="assembly-caption"><b>ASSEMBLING</b> / PRODUCTION · QUALITY · LOGISTICS · FIELD</span>
-        <span className="gate-progress"><i /></span>
-        <span className="gate-skip">Click to skip</span>
-      </button>
+    <main className={entered ? "site-entered" : "site-entering"}>
       <header className="nav">
         <a className="brand" href="#top" aria-label="J Z Concrete home">
           <img src="/jz/logo-clean.jpeg" alt="J Z Concrete" />
