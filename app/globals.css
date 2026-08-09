@@ -76,3 +76,7 @@ h1,.statement h2,.ops-copy h2,.hub-head h2,.process h2,.product-head h2,.fleet-c
 /* Prevent header action collisions at translated and intermediate widths */
 .nav{gap:18px}.nav .brand,.nav-cta,.language-switch{flex:0 0 auto}.nav-cta{white-space:nowrap}.navlinks{min-width:0}.language-switch{white-space:nowrap}
 @media(max-width:1180px) and (min-width:801px){.nav{padding-inline:2.5vw}.navlinks{margin-left:auto;margin-right:8px;gap:18px}.nav-cta{display:none}.language-switch{margin-left:0}}
+
+/* High-contrast post-hero transition */
+.statement{position:relative;background:#f7f5ef!important;color:#102a42!important;border-top:8px solid var(--red)!important}.statement:before{content:"JZ / ENGINEERED CONFIDENCE";position:absolute;right:7.5vw;top:42px;color:#7a858c;font:9px var(--font-mono);letter-spacing:.16em}.statement .section-tag{color:#c91f29!important}.statement h2{color:#102a42!important}.statement h2 span{color:#d5232d!important}.statement-grid p{color:#394955!important}.statement-grid a{color:#102a42!important;border-bottom-color:#d5232d!important}.statement-grid a span{color:#d5232d}.service-scope{background:#e7edf1!important;color:#102a42}.scope-intro>p:last-child,.scope-steps p{color:#435661!important}.scope-steps article{border-top-color:#aab8c1}.scope-steps a{color:#123d67!important}
+@media(max-width:800px){.statement:before{display:none}.statement{border-top-width:5px!important}}
