@@ -9,6 +9,10 @@ const products = [
   { n:"04", title:"Self-compacting concrete", summary:"High-flow placement through congested reinforcement and complex formwork.", grades:"Performance-specified SCC", use:"Dense reinforcement, architectural forms, columns, walls and areas that are difficult to vibrate.", note:"Flow, stability and formwork pressure are checked against the placement method." },
   { n:"05", title:"Mining concrete", summary:"Purpose-built mixes for demanding mining and industrial environments.", grades:"Application and exposure specific", use:"Mine infrastructure, equipment bases, hardstands, processing areas, underground works and shotcrete applications.", note:"Mix selection considers abrasion, chemicals, access, pumping and operating conditions." },
   { n:"06", title:"Road & bridge concrete", summary:"Consistent paving and structural mixes for public infrastructure.", grades:"Engineer-specified paving and structural classes", use:"Rigid pavements, culverts, bridge decks, abutments, barriers, drains and road structures.", note:"Designed around traffic loading, exposure, finish and construction programme." },
+  { n:"07", title:"Fibre-reinforced concrete", summary:"Concrete enhanced with specified fibres for crack control and performance.", grades:"Project-specific fibre type and dosage", use:"Industrial floors, slabs, pavements, precast elements and applications requiring improved crack resistance.", note:"Fibre selection and dosage must match the structural and service requirements." },
+  { n:"08", title:"Shotcrete", summary:"Pumpable concrete or mortar placed pneumatically at high velocity.", grades:"Wet-mix or project-specified shotcrete", use:"Slope stabilisation, tunnels, mining support, retaining structures, repairs and complex surfaces.", note:"Nozzle technique, rebound control, access and substrate preparation are critical to performance." },
+  { n:"09", title:"Flowable fill", summary:"A self-levelling controlled low-strength material for fast, complete filling.", grades:"Controlled low-strength material", use:"Trenches, pipe bedding, void filling, abandoned services and areas that are difficult to compact.", note:"Strength and future excavability are selected around the application." },
+  { n:"10", title:"Mortar & custom mixes", summary:"Application-specific mixes developed around placement and finish requirements.", grades:"Project-specific formulation", use:"Masonry, screeds, grouting, repairs and specialised construction details.", note:"Final formulation depends on materials, finish, exposure and method of placement." },
 ];
 
 const industries = ["Residential", "Commercial", "Industrial", "Mining", "Roads", "Bridges", "Airports", "Water", "Schools", "Hospitals", "Government", "Energy"];
@@ -145,6 +149,15 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="service-scope reveal" aria-label="J Z Concrete service scope">
+        <div className="scope-intro"><p className="section-tag">/ Complete concrete service</p><h2>Produce.<br />Supply.<br /><span>Place.</span></h2><p>The concrete itself is only one part of a successful pour. J Z connects controlled production with coordinated delivery and practical placement planning.</p></div>
+        <div className="scope-steps">
+          <article><span>01</span><h3>Produce</h3><p>Mix selection, raw-material control, moisture checks and automated batching support consistent output.</p><a href="#facilities">Production facilities →</a></article>
+          <article><span>02</span><h3>Supply</h3><p>Order planning and coordinated mixer movement align concrete supply with the site programme.</p><a href="#logistics">Logistics & fleet →</a></article>
+          <article><span>03</span><h3>Place</h3><p>Pumping strategy, access planning and technical guidance help the site prepare for efficient placement.</p><a href="#quote">Plan a pour →</a></article>
+        </div>
+      </section>
+
       <section className="operations-theatre reveal">
         <div className="ops-stage">
           <div className="ops-copy"><p className="section-tag">/ One connected operation</p><h2>PLANT.<br />LAB.<br />FLEET.<br /><span>FIELD.</span></h2><p>A concrete supply chain designed as one continuous engineering system—from raw material verification to the final placed structure.</p></div>
@@ -190,7 +203,7 @@ export default function Home() {
             {products.map((product, index) => <button className={activeProduct === index ? "active" : ""} onClick={() => setActiveProduct(index)} key={product.n} role="tab" aria-selected={activeProduct === index}><span>{product.n}</span><h3>{product.title}</h3><p>{product.summary}</p><b>→</b></button>)}
           </div>
           <article className="product-detail" aria-live="polite">
-            <span className="detail-number">{products[activeProduct].n} / 06</span>
+            <span className="detail-number">{products[activeProduct].n} / {String(products.length).padStart(2,"0")}</span>
             <h3>{products[activeProduct].title}</h3>
             <div><small>GRADES / CLASS</small><p>{products[activeProduct].grades}</p></div>
             <div><small>COMMON APPLICATIONS</small><p>{products[activeProduct].use}</p></div>
