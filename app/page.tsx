@@ -3,35 +3,41 @@
 import { useEffect, useMemo, useState } from "react";
 
 const products = [
-  ["01", "Commercial ready-mix", "Reliable structural concrete for programmes that cannot drift."],
-  ["02", "High-performance", "Engineered strength, durability and controlled workability."],
-  ["03", "Waterproof concrete", "Low-permeability mixes for tanks, basements and water infrastructure."],
-  ["04", "Self-compacting", "High-flow placement through dense reinforcement and complex formwork."],
-  ["05", "Mining concrete", "Purpose-built mixes for demanding mining and industrial environments."],
-  ["06", "Road & bridge", "Consistent paving and structural mixes for national infrastructure."],
+  { n:"01", title:"Commercial ready-mix", summary:"Structural concrete for everyday and large-scale building programmes.", grades:"C15 · C20 · C25 · C30 · C35 · C40+", use:"Blinding, foundations, floor slabs, columns, beams, suspended slabs and structural frames.", note:"The final grade must follow the structural engineer’s specification." },
+  { n:"02", title:"High-performance concrete", summary:"Engineered strength, durability and controlled workability.", grades:"Project-specific performance classes", use:"High-rise structures, heavily loaded foundations, industrial floors and demanding structural elements.", note:"Designed with the project engineer around strength, exposure and placement requirements." },
+  { n:"03", title:"Waterproof concrete", summary:"Low-permeability concrete for structures exposed to water.", grades:"Project-specific watertight mix", use:"Water tanks, swimming pools, basements, retaining walls, sumps, reservoirs and water infrastructure.", note:"Watertight performance also depends on joint design, correct placement and curing." },
+  { n:"04", title:"Self-compacting concrete", summary:"High-flow placement through congested reinforcement and complex formwork.", grades:"Performance-specified SCC", use:"Dense reinforcement, architectural forms, columns, walls and areas that are difficult to vibrate.", note:"Flow, stability and formwork pressure are checked against the placement method." },
+  { n:"05", title:"Mining concrete", summary:"Purpose-built mixes for demanding mining and industrial environments.", grades:"Application and exposure specific", use:"Mine infrastructure, equipment bases, hardstands, processing areas, underground works and shotcrete applications.", note:"Mix selection considers abrasion, chemicals, access, pumping and operating conditions." },
+  { n:"06", title:"Road & bridge concrete", summary:"Consistent paving and structural mixes for public infrastructure.", grades:"Engineer-specified paving and structural classes", use:"Rigid pavements, culverts, bridge decks, abutments, barriers, drains and road structures.", note:"Designed around traffic loading, exposure, finish and construction programme." },
 ];
 
 const industries = ["Residential", "Commercial", "Industrial", "Mining", "Roads", "Bridges", "Airports", "Water", "Schools", "Hospitals", "Government", "Energy"];
 
 const capabilities = [
-  ["Production facilities", "Batching plants, aggregate handling, cement silos, control room, workshop and fleet yard.", "PLANT / 01"],
-  ["Quality assurance", "Material inspection, moisture analysis, mix design, slump, cube and durability testing.", "LAB / 02"],
-  ["Logistics & fleet", "Mixer trucks, concrete pumps, service vehicles, GPS tracking and coordinated dispatch.", "MOVE / 03"],
-  ["Safety culture", "Training, PPE standards, equipment inspection, emergency response and incident reporting.", "SAFE / 04"],
-  ["Sustainability", "Water recycling, dust control, waste reduction, energy efficiency and community investment.", "ESG / 05"],
-  ["Technical support", "Mix selection, pre-pour planning, placement guidance and project documentation.", "TECH / 06"],
+  ["Production facilities", "Batching plants, aggregate handling, cement silos, control room, workshop and fleet yard.", "PLANT / 01", "facilities"],
+  ["Quality assurance", "Material inspection, moisture analysis, mix design, slump, cube and durability testing.", "LAB / 02", "quality"],
+  ["Logistics & fleet", "Mixer trucks, concrete pumps, service vehicles, GPS tracking and coordinated operations.", "MOVE / 03", "logistics"],
+  ["Safety culture", "Training, PPE standards, equipment inspection, emergency response and incident reporting.", "SAFE / 04", "why-jz"],
+  ["Sustainability", "Water recycling, dust control, waste reduction, energy efficiency and community investment.", "ESG / 05", "why-jz"],
+  ["Technical support", "Mix selection, pre-pour planning, placement guidance and project documentation.", "TECH / 06", "concrete-guide"],
 ];
 
-const companyAreas = ["About Jianzhou", "Why choose J Z", "Production facilities", "Quality assurance", "Logistics & fleet", "Major projects", "Sustainability", "Safety", "Careers", "News & media", "Downloads", "Customer portal"];
+const companyAreas = [
+  ["About Jianzhou", "about"], ["Why choose J Z", "why-jz"], ["Production facilities", "facilities"], ["Quality assurance", "quality"],
+  ["Logistics & fleet", "logistics"], ["Major projects", "projects"], ["Sustainability", "why-jz"], ["Safety", "why-jz"],
+  ["Careers", "quote"], ["News & media", "media"], ["Downloads", "downloads"], ["Customer enquiries", "quote"],
+];
 
 export default function Home() {
   const [menu, setMenu] = useState(false);
+  const [language, setLanguage] = useState<"EN" | "SN">("EN");
+  const [activeProduct, setActiveProduct] = useState(0);
   const [entered, setEntered] = useState(false);
-  const [length, setLength] = useState("10");
-  const [width, setWidth] = useState("8");
-  const [depth, setDepth] = useState("150");
-  const [quantity, setQuantity] = useState("1");
-  const [allowance, setAllowance] = useState("5");
+  const [length, setLength] = useState("0");
+  const [width, setWidth] = useState("0");
+  const [depth, setDepth] = useState("0");
+  const [quantity, setQuantity] = useState("0");
+  const [allowance, setAllowance] = useState("0");
   const [contactName, setContactName] = useState("");
   const [projectType, setProjectType] = useState("Commercial building");
   const [projectLocation, setProjectLocation] = useState("");
@@ -39,7 +45,7 @@ export default function Home() {
   const [requiredDate, setRequiredDate] = useState("");
   const [replyMode, setReplyMode] = useState("WhatsApp");
   const [contactValue, setContactValue] = useState("");
-  const [destination, setDestination] = useState("sales");
+  const [destination, setDestination] = useState("operations");
   useEffect(() => {
     const entranceTimer = window.setTimeout(() => setEntered(true), 80);
     const nodes = document.querySelectorAll(".reveal");
@@ -60,7 +66,7 @@ export default function Home() {
 
   const sendEnquiry = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const number = destination === "dispatch" ? "263777003547" : "263777003039";
+    const number = destination === "operations" ? "263777003039" : "263777003547";
     const message = [
       "J Z Concrete website enquiry",
       `Name: ${contactName}`,
@@ -71,7 +77,23 @@ export default function Home() {
       `Required date: ${requiredDate || "To be confirmed"}`,
       `Preferred reply: ${replyMode} — ${contactValue}`,
     ].join("\n");
+    if (replyMode === "Phone call") {
+      window.location.href = `tel:+${number}`;
+      return;
+    }
+    if (replyMode === "Email") {
+      window.location.href = `mailto:jianzhou01@gmail.com?subject=${encodeURIComponent("J Z Concrete project enquiry")}&body=${encodeURIComponent(message)}`;
+      return;
+    }
     window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+  };
+
+  const words = language === "EN" ? {
+    capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume",
+    hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.",
+  } : {
+    capability:"Zvatinokwanisa", concrete:"Kongiri", projects:"Mapurojekiti", knowledge:"Ruzivo", quote:"Kumbira mutengo", calculator:"Verenga huwandu",
+    hero:"J Z Concrete inobatanidza kugadzirwa kwemhando yepamusoro, kuongororwa murabhoritari, kutakurwa kwakarongeka nerutsigiro rwehunyanzvi.",
   };
 
   return (
@@ -82,11 +104,12 @@ export default function Home() {
           <span>J Z <b>CONCRETE</b></span>
         </a>
         <nav className={menu ? "navlinks open" : "navlinks"} aria-label="Primary navigation">
-          <a href="#capability" onClick={() => setMenu(false)}>Capabilities</a>
-          <a href="#products" onClick={() => setMenu(false)}>Concrete</a>
-          <a href="#projects" onClick={() => setMenu(false)}>Projects</a>
-          <a href="#knowledge" onClick={() => setMenu(false)}>Knowledge</a>
+          <a href="#capability" onClick={() => setMenu(false)}>{words.capability}</a>
+          <a href="#products" onClick={() => setMenu(false)}>{words.concrete}</a>
+          <a href="#projects" onClick={() => setMenu(false)}>{words.projects}</a>
+          <a href="#knowledge" onClick={() => setMenu(false)}>{words.knowledge}</a>
         </nav>
+        <button className="language-switch" onClick={() => setLanguage(language === "EN" ? "SN" : "EN")} aria-label="Change language"><b>{language}</b><span>{language === "EN" ? "SHONA" : "ENGLISH"}</span></button>
         <a className="nav-cta" href="#quote">Request a quote <span>↗</span></a>
         <button className="menu" onClick={() => setMenu(!menu)} aria-label="Toggle menu">{menu ? "Close" : "Menu"}</button>
       </header>
@@ -98,7 +121,7 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow"><i /> Concrete infrastructure platform</p>
           <h1><span className="hero-word word-one">WE DON’T</span><span className="hero-word word-two">JUST POUR.</span><em><span className="hero-word word-three">WE POWER</span><span className="hero-word word-four">PROGRESS.</span></em></h1>
-          <p className="hero-lede">J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.</p>
+          <p className="hero-lede">{words.hero}</p>
           <p className="brand-line">If it’s not <b>JZ</b>, it’s not concrete.</p>
           <div className="hero-actions">
             <a className="primary" href="#quote">Request a quote <span>→</span></a>
@@ -115,9 +138,9 @@ export default function Home() {
 
       <section className="statement reveal" id="capability">
         <p className="section-tag">/ The Jianzhou standard</p>
-        <h2>Concrete is invisible<br />when it works.<br /><span>Unforgettable when it fails.</span></h2>
+        <h2>Engineered for the pour.<br /><span>Proven in the structure.</span></h2>
         <div className="statement-grid">
-          <p>We approach every cubic metre as engineered infrastructure—not a commodity. Materials, moisture, mix, movement and placement are managed as one connected system.</p>
+          <p>Every cubic metre is controlled through material checks, mix design, automated batching, coordinated delivery and technical support—giving the project team confidence from order to placement.</p>
           <a href="#quality">Explore quality control <span>↗</span></a>
         </div>
       </section>
@@ -136,11 +159,17 @@ export default function Home() {
       <section className="capability-hub reveal">
         <div className="hub-head"><p className="section-tag">/ Integrated capability</p><h2>One partner.<br /><span>Every critical stage.</span></h2><p>International production discipline connected to practical, responsive support on Zimbabwean projects.</p></div>
         <div className="capability-tiles">
-          {capabilities.map(([title, copy, code], index) => <article key={title} style={{"--delay": `${index * 70}ms`} as React.CSSProperties}><div className="tile-code">{code}</div><div className="tile-orbit"><i /><i /></div><h3>{title}</h3><p>{copy}</p><span className="tile-arrow">↗</span></article>)}
+          {capabilities.map(([title, copy, code, target], index) => <a href={`#${target}`} key={title} style={{"--delay": `${index * 70}ms`} as React.CSSProperties}><div className="tile-code">{code}</div><div className="tile-orbit"><i /><i /></div><h3>{title}</h3><p>{copy}</p><span className="tile-arrow">↗</span></a>)}
         </div>
       </section>
 
-      <section className="process reveal" id="quality">
+      <section className="operational-proof reveal" aria-label="J Z operational capabilities">
+        <article id="facilities"><img src="/jz/plant.jpeg" alt="J Z Concrete batching plants and cement silos" /><div><span>01 / PRODUCTION</span><h2>Production facilities</h2><p>Integrated batching plants, aggregate handling, cement silos, automated control, fleet yard and maintenance support form the operating centre of every order.</p><a href="#media">View the facility gallery →</a></div></article>
+        <article id="quality"><img src="/jz/slump.jpeg" alt="Concrete slump testing and quality inspection" /><div><span>02 / QUALITY</span><h2>Quality assurance</h2><p>Raw-material inspection, moisture analysis, controlled mix design, slump testing, cube testing and final verification support consistent concrete performance.</p><a href="#knowledge">Explore technical guidance →</a></div></article>
+        <article id="logistics"><img src="/jz/fleet-line.jpeg" alt="J Z Concrete mixer truck fleet" /><div><span>03 / LOGISTICS</span><h2>Logistics & fleet</h2><p>Mixer trucks, concrete pumps, service support and coordinated operations connect plant production to the pour programme on site.</p><a href="#quote">Plan delivery with operations →</a></div></article>
+      </section>
+
+      <section className="process reveal" id="quality-process">
         <div className="process-image"><img src="/jz/slump.jpeg" alt="Concrete slump testing" /><span>LAB / 01</span></div>
         <div className="process-copy">
           <p className="section-tag">/ From material to structure</p>
@@ -156,14 +185,24 @@ export default function Home() {
 
       <section className="products reveal" id="products">
         <div className="product-head"><div><p className="section-tag">/ Concrete systems</p><h2>Specified for<br /><i>the real world.</i></h2></div><p>From residential slabs to mining and public infrastructure, our mix portfolio is built around the demands of the structure, site and programme.</p></div>
-        <div className="product-list">
-          {products.map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p><b>↗</b></article>)}
+        <div className="concrete-guide" id="concrete-guide">
+          <div className="product-list" role="tablist" aria-label="Concrete systems">
+            {products.map((product, index) => <button className={activeProduct === index ? "active" : ""} onClick={() => setActiveProduct(index)} key={product.n} role="tab" aria-selected={activeProduct === index}><span>{product.n}</span><h3>{product.title}</h3><p>{product.summary}</p><b>→</b></button>)}
+          </div>
+          <article className="product-detail" aria-live="polite">
+            <span className="detail-number">{products[activeProduct].n} / 06</span>
+            <h3>{products[activeProduct].title}</h3>
+            <div><small>GRADES / CLASS</small><p>{products[activeProduct].grades}</p></div>
+            <div><small>COMMON APPLICATIONS</small><p>{products[activeProduct].use}</p></div>
+            <div><small>TECHNICAL NOTE</small><p>{products[activeProduct].note}</p></div>
+            <a href="#quote">Discuss this concrete <b>→</b></a>
+          </article>
         </div>
       </section>
 
       <section className="fleet-scene reveal">
         <img src="/jz/mixer.jpeg" alt="J Z Concrete ready-mix truck" />
-        <div className="fleet-copy"><p className="section-tag">/ Concrete in motion</p><h2>The pour doesn’t<br />wait. <em>Neither do we.</em></h2><p>Production, dispatch and placement support move as one—so the right concrete arrives ready for the moment it matters.</p><a href="#quote">Talk to dispatch <span>→</span></a></div>
+        <div className="fleet-copy"><p className="section-tag">/ Concrete in motion</p><h2>The pour doesn’t<br />wait. <em>Neither do we.</em></h2><p>Production, operations and placement support move as one—so the right concrete arrives ready for the moment it matters.</p><a href="#quote">Talk to operations <span>→</span></a></div>
         <div className="route-line"><i /><i /><i /><i /></div>
       </section>
 
@@ -197,6 +236,28 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="media-centre reveal" id="media">
+        <div className="media-head"><div><p className="section-tag">/ Media gallery</p><h2>Inside the<br />operation.</h2></div><p>Plant, fleet, testing and placement—captured from the work itself. Approved project videos can be added here without changing the experience.</p></div>
+        <div className="media-grid">
+          <figure className="media-wide"><img src="/jz/fleet-premium.jpeg" alt="J Z Concrete production facility and mixer fleet" /><figcaption><b>Plant & fleet</b><span>Production ready</span></figcaption></figure>
+          <figure><img src="/jz/pump.jpeg" alt="Concrete pump used for placement" /><figcaption><b>Pumping</b><span>Placement capability</span></figcaption></figure>
+          <figure><img src="/jz/pour.jpeg" alt="Concrete placement team at work" /><figcaption><b>On site</b><span>Coordinated pour</span></figcaption></figure>
+          <figure><img src="/jz/slump.jpeg" alt="Concrete slump test" /><figcaption><b>Laboratory</b><span>Quality verification</span></figcaption></figure>
+          <div className="video-ready"><span>VIDEO / READY</span><h3>Project film library</h3><p>This space is prepared for approved plant tours, project milestones and testimonial footage.</p><small>Video files awaiting client upload</small></div>
+        </div>
+        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263777003547" target="_blank" rel="noreferrer">WhatsApp ↗</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
+      </section>
+
+      <section className="company-story reveal" id="about">
+        <div><p className="section-tag">/ About J Z</p><h2>International engineering.<br /><span>Built for Zimbabwe.</span></h2></div>
+        <div className="story-copy"><p>Jianzhou Concrete brings production discipline, technical control and coordinated ready-mix delivery together for Zimbabwe’s building and infrastructure market.</p><ol><li><b>01</b><span>Production</span>Controlled batching and material management.</li><li><b>02</b><span>Verification</span>Laboratory-led checks before and during supply.</li><li><b>03</b><span>Delivery</span>Operations aligned to the project’s pour window.</li><li><b>04</b><span>Support</span>Technical guidance from selection to placement.</li></ol></div>
+      </section>
+
+      <section className="why-jz reveal" id="why-jz">
+        <div className="why-image"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /></div>
+        <div><p className="section-tag">/ Why choose J Z</p><h2>More than a supplier.<br /><span>A project partner.</span></h2><ul><li><b>01</b> Intelligent production control</li><li><b>02</b> Laboratory-led quality assurance</li><li><b>03</b> Coordinated fleet and pumping support</li><li><b>04</b> Practical technical guidance</li><li><b>05</b> Safety and responsible operations</li><li><b>06</b> Concrete designed around the application</li></ul></div>
+      </section>
+
       <section className="knowledge reveal" id="knowledge">
         <div className="knowledge-title"><p className="section-tag">/ Technical knowledge centre</p><h2>Better concrete<br />starts before<br />the truck arrives.</h2></div>
         <div className="articles">
@@ -204,13 +265,18 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="downloads reveal" id="downloads">
+        <div><p className="section-tag">/ Downloads</p><h2>Project documents,<br /><span>properly controlled.</span></h2><p>Technical data sheets, mix brochures, certificates, safety documents and the corporate profile will appear here as soon as approved source files are supplied.</p></div>
+        <div className="download-list"><span><b>01</b> Product catalogue <small>AWAITING APPROVED PDF</small></span><span><b>02</b> Technical data sheets <small>AWAITING APPROVED PDF</small></span><span><b>03</b> Quality certificates <small>AWAITING APPROVED PDF</small></span><span><b>04</b> Corporate profile <small>AWAITING APPROVED PDF</small></span></div>
+      </section>
+
       <section className="company-map reveal">
         <div className="map-title"><p className="section-tag">/ Complete company platform</p><h2>Explore the<br />J Z ecosystem.</h2><p>Built to become both a sales platform and a technical resource centre for contractors, engineers, architects, developers, mines and public agencies.</p></div>
-        <div className="map-links">{companyAreas.map((item, i) => <a href="#quote" key={item}><span>{String(i + 1).padStart(2,"0")}</span>{item}<b>↗</b></a>)}</div>
+        <div className="map-links">{companyAreas.map(([item, target], i) => <a href={`#${target}`} key={item}><span>{String(i + 1).padStart(2,"0")}</span>{item}<b>↗</b></a>)}</div>
       </section>
 
       <section className="contact-suite reveal" id="quote">
-        <div className="contact-story"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /><div><p className="section-tag">/ Start the conversation</p><h2>Plan your<br />next pour.</h2><p>Choose the team you need and how you want them to reply. Submitting opens a prepared WhatsApp enquiry containing your project details.</p><p className="contact-tagline">If it’s not <b>JZ</b>, it’s not concrete.</p></div></div>
+        <div className="contact-story"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /><div><p className="section-tag">/ Start the conversation</p><h2>Plan your<br />next pour.</h2><p>Choose Operations or Sales, then select WhatsApp, email or a phone call. The final button follows the method you choose.</p><p className="contact-tagline">If it’s not <b>JZ</b>, it’s not concrete.</p></div></div>
         <form className="enquiry-form" onSubmit={sendEnquiry}>
           <div className="form-head"><span>PROJECT ENQUIRY</span><b>01 / 03</b></div>
           <div className="form-grid">
@@ -221,10 +287,10 @@ export default function Home() {
             <label>Estimated volume<input readOnly value={`${volume.order} m³`} /></label>
             <label>Required pour date<input type="date" value={requiredDate} onChange={e => setRequiredDate(e.target.value)} /></label>
           </div>
-          <fieldset><legend>Send enquiry to</legend><label><input type="radio" name="destination" value="sales" checked={destination === "sales"} onChange={e => setDestination(e.target.value)} /> Sales · +263 777 003 039</label><label><input type="radio" name="destination" value="dispatch" checked={destination === "dispatch"} onChange={e => setDestination(e.target.value)} /> Dispatch · +263 777 003 547</label></fieldset>
+          <fieldset><legend>Contact team</legend><label><input type="radio" name="destination" value="operations" checked={destination === "operations"} onChange={e => setDestination(e.target.value)} /> Operations · +263 777 003 039</label><label><input type="radio" name="destination" value="sales" checked={destination === "sales"} onChange={e => setDestination(e.target.value)} /> Sales · +263 777 003 547</label></fieldset>
           <fieldset><legend>How should J Z reply?</legend>{["WhatsApp", "Phone call", "Email"].map(mode => <label key={mode}><input type="radio" name="reply" value={mode} checked={replyMode === mode} onChange={e => setReplyMode(e.target.value)} /> {mode}</label>)}</fieldset>
           <label className="reply-detail">Your {replyMode === "Email" ? "email address" : "phone number"}<input required type={replyMode === "Email" ? "email" : "tel"} value={contactValue} onChange={e => setContactValue(e.target.value)} placeholder={replyMode === "Email" ? "name@company.com" : "+263 …"} /></label>
-          <button className="submit-enquiry" type="submit"><span>Prepare enquiry</span><b>Open WhatsApp ↗</b></button>
+          <button className="submit-enquiry" type="submit"><span>{replyMode === "Phone call" ? "Call selected team" : "Prepare enquiry"}</span><b>{replyMode === "Email" ? "Open email ↗" : replyMode === "Phone call" ? "Start call ↗" : "Open WhatsApp ↗"}</b></button>
           <small>Nothing is sent automatically. You can review the prepared message before sending it.</small>
         </form>
       </section>
