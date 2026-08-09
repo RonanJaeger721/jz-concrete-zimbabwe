@@ -214,7 +214,15 @@ export default function Home() {
         <div className="product-head"><div><p className="section-tag">/ Concrete systems</p><h2>Specified for<br /><i>the real world.</i></h2></div><p>From residential slabs to mining and public infrastructure, our mix portfolio is built around the demands of the structure, site and programme.</p></div>
         <div className="concrete-guide" id="concrete-guide">
           <div className="product-list" role="tablist" aria-label="Concrete systems">
-            {products.map((product, index) => <button className={activeProduct === index ? "active" : ""} onClick={() => setActiveProduct(index)} key={product.n} role="tab" aria-selected={activeProduct === index}><span>{product.n}</span><h3>{product.title}</h3><p>{product.summary}</p><b>→</b></button>)}
+            {products.map((product, index) => <div className="product-row" key={product.n}>
+              <button type="button" className={activeProduct === index ? "active" : ""} onClick={() => setActiveProduct(index)} role="tab" aria-selected={activeProduct === index} aria-expanded={activeProduct === index}><span>{product.n}</span><h3>{product.title}</h3><p>{product.summary}</p><b>{activeProduct === index ? "−" : "+"}</b></button>
+              {activeProduct === index && <article className="product-detail-mobile" role="tabpanel">
+                <div><small>GRADES / CLASS</small><p>{product.grades}</p></div>
+                <div><small>COMMON APPLICATIONS</small><p>{product.use}</p></div>
+                <div><small>TECHNICAL NOTE</small><p>{product.note}</p></div>
+                <a href="#quote">Discuss this concrete <b>→</b></a>
+              </article>}
+            </div>)}
           </div>
           <article className="product-detail" aria-live="polite">
             <span className="detail-number">{products[activeProduct].n} / {String(products.length).padStart(2,"0")}</span>
