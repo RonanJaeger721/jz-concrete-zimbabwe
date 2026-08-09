@@ -34,7 +34,7 @@ const companyAreas = [
 
 export default function Home() {
   const [menu, setMenu] = useState(false);
-  const [language, setLanguage] = useState<"EN" | "SN">("EN");
+  const [language, setLanguage] = useState<"EN" | "FR" | "ZH">("EN");
   const [activeProduct, setActiveProduct] = useState(0);
   const [entered, setEntered] = useState(false);
   const [length, setLength] = useState("0");
@@ -92,13 +92,12 @@ export default function Home() {
     window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 
-  const words = language === "EN" ? {
-    capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume",
-    hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.",
-  } : {
-    capability:"Zvatinokwanisa", concrete:"Kongiri", projects:"Mapurojekiti", knowledge:"Ruzivo", quote:"Kumbira mutengo", calculator:"Verenga huwandu",
-    hero:"J Z Concrete inobatanidza kugadzirwa kwemhando yepamusoro, kuongororwa murabhoritari, kutakurwa kwakarongeka nerutsigiro rwehunyanzvi.",
+  const translations = {
+    EN: { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Concrete infrastructure platform", headline:["We don’t","just pour.","We power","progress."], hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.", tagline:"If it’s not JZ, it’s not concrete." },
+    FR: { capability:"Capacités", concrete:"Béton", projects:"Projets", knowledge:"Expertise", quote:"Demander un devis", calculator:"Calculer le volume", eyebrow:"Plateforme d’infrastructure en béton", headline:["Nous ne faisons","pas que couler.","Nous propulsons","le progrès."], hero:"J Z Concrete réunit production intelligente, contrôle en laboratoire, logistique coordonnée et assistance technique dans un système d’approvisionnement performant.", tagline:"Si ce n’est pas JZ, ce n’est pas du béton." },
+    ZH: { capability:"核心能力", concrete:"混凝土", projects:"项目", knowledge:"技术知识", quote:"获取报价", calculator:"计算用量", eyebrow:"混凝土基础设施平台", headline:["我们不只是","浇筑混凝土。","我们推动","建设进步。"], hero:"J Z Concrete 将智能生产、实验室质量控制、车队协同和技术支持整合为高效的混凝土供应体系。", tagline:"不是 JZ，就不是真正的混凝土。" },
   };
+  const words = translations[language];
 
   return (
     <main className={entered ? "site-entered" : "site-entering"}>
@@ -113,7 +112,7 @@ export default function Home() {
           <a href="#projects" onClick={() => setMenu(false)}>{words.projects}</a>
           <a href="#knowledge" onClick={() => setMenu(false)}>{words.knowledge}</a>
         </nav>
-        <button className="language-switch" onClick={() => setLanguage(language === "EN" ? "SN" : "EN")} aria-label="Change language"><b>{language}</b><span>{language === "EN" ? "SHONA" : "ENGLISH"}</span></button>
+        <div className="language-switch" role="group" aria-label="Change language">{(["EN","FR","ZH"] as const).map(code => <button className={language === code ? "active" : ""} onClick={() => setLanguage(code)} key={code} aria-pressed={language === code}>{code === "ZH" ? "中文" : code}</button>)}</div>
         <a className="nav-cta" href="#quote">Request a quote <span>↗</span></a>
         <button className="menu" onClick={() => setMenu(!menu)} aria-label="Toggle menu">{menu ? "Close" : "Menu"}</button>
       </header>
@@ -123,10 +122,10 @@ export default function Home() {
         <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" /><div className="hero-shade" /><div className="plant-tag"><i /> J Z FLEET<br /><b>PRODUCTION ONLINE</b></div></div>
         <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero-copy">
-          <p className="eyebrow"><i /> Concrete infrastructure platform</p>
-          <h1><span className="hero-word word-one">We don’t</span><span className="hero-word word-two">just pour.</span><em><span className="hero-word word-three">We power</span><span className="hero-word word-four">progress.</span></em></h1>
+          <p className="eyebrow"><i /> {words.eyebrow}</p>
+          <h1><span className="hero-word word-one">{words.headline[0]}</span><span className="hero-word word-two">{words.headline[1]}</span><em><span className="hero-word word-three">{words.headline[2]}</span><span className="hero-word word-four">{words.headline[3]}</span></em></h1>
           <p className="hero-lede">{words.hero}</p>
-          <p className="brand-line">If it’s not <b>JZ</b>, it’s not concrete.</p>
+          <p className="brand-line">{words.tagline}</p>
           <div className="hero-actions">
             <a className="primary" href="#quote">Request a quote <span>→</span></a>
             <a className="text-link" href="#calculator">Calculate volume <span>↓</span></a>
