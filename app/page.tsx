@@ -124,7 +124,7 @@ export default function Home() {
         <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero-copy">
           <p className="eyebrow"><i /> Concrete infrastructure platform</p>
-          <h1><span className="hero-word word-one">WE DON’T</span><span className="hero-word word-two">JUST POUR.</span><em><span className="hero-word word-three">WE POWER</span><span className="hero-word word-four">PROGRESS.</span></em></h1>
+          <h1><span className="hero-word word-one">We don’t</span><span className="hero-word word-two">just pour.</span><em><span className="hero-word word-three">We power</span><span className="hero-word word-four">progress.</span></em></h1>
           <p className="hero-lede">{words.hero}</p>
           <p className="brand-line">If it’s not <b>JZ</b>, it’s not concrete.</p>
           <div className="hero-actions">
