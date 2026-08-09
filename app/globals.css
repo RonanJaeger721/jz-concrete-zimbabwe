@@ -72,3 +72,7 @@ h1,.statement h2,.ops-copy h2,.hub-head h2,.process h2,.product-head h2,.fleet-c
 
 /* Full-page translation engine remains visually behind the custom language control */
 #google_translate_element{position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}.goog-te-banner-frame,.goog-te-balloon-frame{display:none!important}body{top:0!important}.goog-text-highlight{background:transparent!important;box-shadow:none!important}.skiptranslate iframe{visibility:hidden!important}
+
+/* Prevent header action collisions at translated and intermediate widths */
+.nav{gap:18px}.nav .brand,.nav-cta,.language-switch{flex:0 0 auto}.nav-cta{white-space:nowrap}.navlinks{min-width:0}.language-switch{white-space:nowrap}
+@media(max-width:1180px) and (min-width:801px){.nav{padding-inline:2.5vw}.navlinks{margin-left:auto;margin-right:8px;gap:18px}.nav-cta{display:none}.language-switch{margin-left:0}}
