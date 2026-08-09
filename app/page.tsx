@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Script from "next/script";
 
 const products = [
   { n:"01", title:"Commercial ready-mix", summary:"Structural concrete for everyday and large-scale building programmes.", grades:"C15 · C20 · C25 · C30 · C35 · C40+", use:"Blinding, foundations, floor slabs, columns, beams, suspended slabs and structural frames.", note:"The final grade must follow the structural engineer’s specification." },
@@ -57,6 +58,10 @@ export default function Home() {
       if (entry.isIntersecting) entry.target.classList.add("revealed");
     }), { threshold: 0.12 });
     nodes.forEach(node => observer.observe(node));
+    const savedLanguage = document.cookie.match(/googtrans=\/en\/([^;]+)/)?.[1];
+    if (savedLanguage === "fr") setLanguage("FR");
+    if (savedLanguage === "zh-CN") setLanguage("ZH");
+    (window as unknown as { googleTranslateElementInit?: () => void }).googleTranslateElementInit = initialiseTranslator;
     return () => { observer.disconnect(); window.clearTimeout(entranceTimer); };
   }, []);
   const volume = useMemo(() => {
@@ -92,15 +97,25 @@ export default function Home() {
     window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 
-  const translations = {
-    EN: { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Concrete infrastructure platform", headline:["We don’t","just pour.","We power","progress."], hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.", tagline:"If it’s not JZ, it’s not concrete." },
-    FR: { capability:"Capacités", concrete:"Béton", projects:"Projets", knowledge:"Expertise", quote:"Demander un devis", calculator:"Calculer le volume", eyebrow:"Plateforme d’infrastructure en béton", headline:["Nous ne faisons","pas que couler.","Nous propulsons","le progrès."], hero:"J Z Concrete réunit production intelligente, contrôle en laboratoire, logistique coordonnée et assistance technique dans un système d’approvisionnement performant.", tagline:"Si ce n’est pas JZ, ce n’est pas du béton." },
-    ZH: { capability:"核心能力", concrete:"混凝土", projects:"项目", knowledge:"技术知识", quote:"获取报价", calculator:"计算用量", eyebrow:"混凝土基础设施平台", headline:["我们不只是","浇筑混凝土。","我们推动","建设进步。"], hero:"J Z Concrete 将智能生产、实验室质量控制、车队协同和技术支持整合为高效的混凝土供应体系。", tagline:"不是 JZ，就不是真正的混凝土。" },
+  const words = { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Concrete infrastructure platform", headline:["We don’t","just pour.","We power","progress."], hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.", tagline:"If it’s not JZ, it’s not concrete." };
+
+  const initialiseTranslator = () => {
+    const googleApi = (window as unknown as { google?: { translate?: { TranslateElement: new (options: object, elementId: string) => object } } }).google;
+    if (googleApi?.translate && !document.querySelector(".goog-te-combo")) new googleApi.translate.TranslateElement({ pageLanguage: "en", includedLanguages: "en,fr,zh-CN", autoDisplay: false }, "google_translate_element");
   };
-  const words = translations[language];
+
+  const changeLanguage = (next: "EN" | "FR" | "ZH") => {
+    const target = next === "FR" ? "fr" : next === "ZH" ? "zh-CN" : "en";
+    const cookieValue = target === "en" ? "" : `/en/${target}`;
+    document.cookie = `googtrans=${cookieValue};path=/;max-age=${target === "en" ? 0 : 31536000}`;
+    document.cookie = `googtrans=${cookieValue};domain=.${window.location.hostname};path=/;max-age=${target === "en" ? 0 : 31536000}`;
+    window.location.reload();
+  };
 
   return (
     <main className={entered ? "site-entered" : "site-entering"}>
+      <Script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" strategy="afterInteractive" onLoad={initialiseTranslator} />
+      <div id="google_translate_element" aria-hidden="true" />
       <header className="nav">
         <a className="brand" href="#top" aria-label="J Z Concrete home">
           <img src="/jz/logo-clean.jpeg" alt="J Z Concrete" />
@@ -112,7 +127,7 @@ export default function Home() {
           <a href="#projects" onClick={() => setMenu(false)}>{words.projects}</a>
           <a href="#knowledge" onClick={() => setMenu(false)}>{words.knowledge}</a>
         </nav>
-        <div className="language-switch" role="group" aria-label="Change language">{(["EN","FR","ZH"] as const).map(code => <button className={language === code ? "active" : ""} onClick={() => setLanguage(code)} key={code} aria-pressed={language === code}>{code === "ZH" ? "中文" : code}</button>)}</div>
+        <div className="language-switch notranslate" role="group" aria-label="Change language">{(["EN","FR","ZH"] as const).map(code => <button className={language === code ? "active" : ""} onClick={() => changeLanguage(code)} key={code} aria-pressed={language === code}>{code === "ZH" ? "中文" : code}</button>)}</div>
         <a className="nav-cta" href="#quote">Request a quote <span>↗</span></a>
         <button className="menu" onClick={() => setMenu(!menu)} aria-label="Toggle menu">{menu ? "Close" : "Menu"}</button>
       </header>
