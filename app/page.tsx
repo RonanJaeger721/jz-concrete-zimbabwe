@@ -56,7 +56,7 @@ export default function Home() {
   const [adminUnlocked, setAdminUnlocked] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
   const [adminError, setAdminError] = useState("");
-  const [invoice, setInvoice] = useState({ number:`JZ-${new Date().getFullYear()}-001`, date:new Date().toISOString().slice(0,10), due:"", client:"", company:"", address:"", description:"Ready-mix concrete supply", quantity:"1", rate:"0", tax:"0", notes:"Thank you for choosing J Z Concrete." });
+  const [invoice, setInvoice] = useState({ type:"Invoice", number:`JZ-INV-${new Date().getFullYear()}-001`, date:new Date().toISOString().slice(0,10), due:"", client:"", company:"", address:"", description:"C25 Ready-Mix Concrete", quantity:"1", rate:"0", vat:"0", tax:"0", bank:"", accountName:"J Z Concrete", accountNumber:"", branch:"", swift:"", notes:"Thank you for choosing J Z Concrete." });
   useEffect(() => {
     const entranceTimer = window.setTimeout(() => setEntered(true), 80);
     const nodes = document.querySelectorAll(".reveal");
@@ -127,8 +127,9 @@ export default function Home() {
   };
 
   const invoiceSubtotal = Math.max(0, Number(invoice.quantity) || 0) * Math.max(0, Number(invoice.rate) || 0);
+  const invoiceVat = invoiceSubtotal * Math.max(0, Number(invoice.vat) || 0) / 100;
   const invoiceTax = invoiceSubtotal * Math.max(0, Number(invoice.tax) || 0) / 100;
-  const invoiceTotal = invoiceSubtotal + invoiceTax;
+  const invoiceTotal = invoiceSubtotal + invoiceVat + invoiceTax;
   const money = (value:number) => new Intl.NumberFormat("en-US", { style:"currency", currency:"USD" }).format(value);
 
   const words = { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Concrete infrastructure platform", headline:["We don’t","just pour.","We power","progress."], hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.", tagline:"If it’s not JZ, it’s not concrete." };
@@ -384,27 +385,36 @@ export default function Home() {
           <header><div><span>J Z / ADMINISTRATION</span><h2>Invoice studio</h2></div><button onClick={() => setAdminOpen(false)} aria-label="Close">×</button></header>
           <div className="invoice-workspace">
             <form className="invoice-controls" onSubmit={e => e.preventDefault()}>
+              <div className="document-switch" role="group" aria-label="Document type">{["Invoice","Quotation"].map(type => <button type="button" className={invoice.type === type ? "active" : ""} key={type} onClick={() => setInvoice({...invoice,type,number:`JZ-${type === "Invoice" ? "INV" : "QUO"}-${new Date().getFullYear()}-001`})}>{type}</button>)}</div>
               <div className="invoice-field-grid">
-                <label>Invoice number<input value={invoice.number} onChange={e => setInvoice({...invoice,number:e.target.value})} /></label>
-                <label>Invoice date<input type="date" value={invoice.date} onChange={e => setInvoice({...invoice,date:e.target.value})} /></label>
-                <label>Due date<input type="date" value={invoice.due} onChange={e => setInvoice({...invoice,due:e.target.value})} /></label>
+                <label>{invoice.type} number<input value={invoice.number} onChange={e => setInvoice({...invoice,number:e.target.value})} /></label>
+                <label>{invoice.type} date<input type="date" value={invoice.date} onChange={e => setInvoice({...invoice,date:e.target.value})} /></label>
+                <label>{invoice.type === "Invoice" ? "Due date" : "Valid until"}<input type="date" value={invoice.due} onChange={e => setInvoice({...invoice,due:e.target.value})} /></label>
                 <label>Client name<input value={invoice.client} onChange={e => setInvoice({...invoice,client:e.target.value})} placeholder="Client contact" /></label>
                 <label>Company<input value={invoice.company} onChange={e => setInvoice({...invoice,company:e.target.value})} placeholder="Customer company" /></label>
                 <label className="full">Billing address<textarea value={invoice.address} onChange={e => setInvoice({...invoice,address:e.target.value})} /></label>
-                <label className="full">Item description<input value={invoice.description} onChange={e => setInvoice({...invoice,description:e.target.value})} /></label>
+                <label className="full">Concrete grade / mix<select value={invoice.description} onChange={e => setInvoice({...invoice,description:e.target.value})}>{["C10 Ready-Mix Concrete","C15 Ready-Mix Concrete","C20 Ready-Mix Concrete","C25 Ready-Mix Concrete","C30 Ready-Mix Concrete","C35 Ready-Mix Concrete","Swimming Pool Mix","Waterproof Concrete Mix","High-Performance Concrete","Self-Compacting Concrete","Fibre-Reinforced Concrete","Shotcrete","Mortar / Custom Mix"].map(item => <option key={item}>{item}</option>)}</select></label>
                 <label>Quantity<input type="number" min="0" step="0.01" value={invoice.quantity} onChange={e => setInvoice({...invoice,quantity:e.target.value})} /></label>
                 <label>Rate (USD)<input type="number" min="0" step="0.01" value={invoice.rate} onChange={e => setInvoice({...invoice,rate:e.target.value})} /></label>
-                <label>Tax (%)<input type="number" min="0" step="0.01" value={invoice.tax} onChange={e => setInvoice({...invoice,tax:e.target.value})} /></label>
+                <label>VAT (%)<input type="number" min="0" step="0.01" value={invoice.vat} onChange={e => setInvoice({...invoice,vat:e.target.value})} /></label>
+                <label>Additional tax (%)<input type="number" min="0" step="0.01" value={invoice.tax} onChange={e => setInvoice({...invoice,tax:e.target.value})} /></label>
+                <div className="form-divider full"><span>BANKING DETAILS</span></div>
+                <label>Bank name<input value={invoice.bank} onChange={e => setInvoice({...invoice,bank:e.target.value})} placeholder="Bank name" /></label>
+                <label>Account name<input value={invoice.accountName} onChange={e => setInvoice({...invoice,accountName:e.target.value})} /></label>
+                <label>Account number<input value={invoice.accountNumber} onChange={e => setInvoice({...invoice,accountNumber:e.target.value})} /></label>
+                <label>Branch<input value={invoice.branch} onChange={e => setInvoice({...invoice,branch:e.target.value})} /></label>
+                <label className="full">SWIFT / reference<input value={invoice.swift} onChange={e => setInvoice({...invoice,swift:e.target.value})} /></label>
                 <label className="full">Notes<textarea value={invoice.notes} onChange={e => setInvoice({...invoice,notes:e.target.value})} /></label>
               </div>
               <button className="print-invoice" type="button" onClick={() => window.print()}>Print / save PDF →</button>
               <small>Review every detail before issuing the invoice. Records are not stored by the website.</small>
             </form>
             <article className="invoice-sheet">
-              <div className="invoice-brand"><img src="/jz/logo-clean.jpeg" alt="" /><div><b>J Z CONCRETE</b><span>Ready-mix concrete · Harare, Zimbabwe</span></div><h3>INVOICE</h3></div>
-              <div className="invoice-meta"><div><small>BILL TO</small><b>{invoice.company || "Customer company"}</b><span>{invoice.client || "Client name"}</span><span>{invoice.address || "Billing address"}</span></div><dl><dt>Invoice</dt><dd>{invoice.number}</dd><dt>Date</dt><dd>{invoice.date || "—"}</dd><dt>Due</dt><dd>{invoice.due || "On receipt"}</dd></dl></div>
+              <div className="invoice-brand"><img src="/jz/logo-clean.jpeg" alt="" /><div><b>J Z CONCRETE</b><span>Ready-mix concrete · Harare, Zimbabwe</span></div><h3>{invoice.type.toUpperCase()}</h3></div>
+              <div className="invoice-meta"><div><small>{invoice.type === "Invoice" ? "BILL TO" : "QUOTATION FOR"}</small><b>{invoice.company || "Customer company"}</b><span>{invoice.client || "Client name"}</span><span>{invoice.address || "Billing address"}</span></div><dl><dt>{invoice.type}</dt><dd>{invoice.number}</dd><dt>Date</dt><dd>{invoice.date || "—"}</dd><dt>{invoice.type === "Invoice" ? "Due" : "Valid until"}</dt><dd>{invoice.due || (invoice.type === "Invoice" ? "On receipt" : "To be confirmed")}</dd></dl></div>
               <table><thead><tr><th>Description</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead><tbody><tr><td>{invoice.description || "Concrete supply"}</td><td>{invoice.quantity || "0"}</td><td>{money(Number(invoice.rate) || 0)}</td><td>{money(invoiceSubtotal)}</td></tr></tbody></table>
-              <div className="invoice-totals"><span>Subtotal <b>{money(invoiceSubtotal)}</b></span><span>Tax ({Number(invoice.tax) || 0}%) <b>{money(invoiceTax)}</b></span><strong>Total <b>{money(invoiceTotal)}</b></strong></div>
+              <div className="invoice-totals"><span>Subtotal <b>{money(invoiceSubtotal)}</b></span><span>VAT ({Number(invoice.vat) || 0}%) <b>{money(invoiceVat)}</b></span><span>Additional tax ({Number(invoice.tax) || 0}%) <b>{money(invoiceTax)}</b></span><strong>Total <b>{money(invoiceTotal)}</b></strong></div>
+              <div className="banking-preview"><small>BANKING DETAILS</small><div><span><b>Bank</b>{invoice.bank || "Add bank name"}</span><span><b>Account name</b>{invoice.accountName || "J Z Concrete"}</span><span><b>Account number</b>{invoice.accountNumber || "Add account number"}</span><span><b>Branch</b>{invoice.branch || "Add branch"}</span><span><b>SWIFT / Reference</b>{invoice.swift || "Add SWIFT or reference"}</span></div></div>
               <div className="invoice-notes"><small>NOTES</small><p>{invoice.notes}</p></div>
               <footer><b>If it’s not JZ, it’s not concrete.</b><span>+263 777 003 039 · +263 777 003 547</span></footer>
             </article>
