@@ -81,7 +81,7 @@ export default function Home() {
 
   const sendEnquiry = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const number = destination === "operations" ? "263777003039" : "263777003547";
+    const number = destination === "operations" ? "263774661555" : "263776506885";
     const message = [
       "J Z Concrete website enquiry",
       `Name: ${contactName}`,
@@ -305,22 +305,23 @@ export default function Home() {
           <figure><img src="/jz/dam.jpeg" alt="Large scale concrete dam structure" /><figcaption><span>Infrastructure</span><b>High-volume applications</b></figcaption></figure>
         </div>
         <div className="project-gallery-more" aria-label="More J Z Concrete project work">
-          <figure><img src="/jz/pump.jpeg" alt="Concrete boom pump supporting placement" /><figcaption><span>Pumping</span><b>Access-led placement</b></figcaption></figure>
-          <figure><img src="/jz/slump.jpeg" alt="Concrete slump test during quality verification" /><figcaption><span>Quality control</span><b>On-site verification</b></figcaption></figure>
-          <figure><img src="/jz/fleet-line.jpeg" alt="J Z Concrete mixer fleet ready for dispatch" /><figcaption><span>Logistics</span><b>Coordinated delivery</b></figcaption></figure>
+          <figure><img src="/jz/project-campus-01.jpeg" alt="J Z Concrete project under construction" /><figcaption><span>Project delivery</span><b>Concrete built for scale</b></figcaption></figure>
+          <figure><img src="/jz/project-campus-02.jpeg" alt="Large concrete development under construction" /><figcaption><span>Detailed execution</span><b>Care at every stage</b></figcaption></figure>
+          <figure><img src="/jz/project-campus-03.jpeg" alt="Curved concrete structures under construction" /><figcaption><span>Precision</span><b>Complex structural work</b></figcaption></figure>
+          <figure><img src="/jz/project-campus-04.jpeg" alt="Major circular concrete structure under construction" /><figcaption><span>Capability</span><b>Projects of every scale</b></figcaption></figure>
         </div>
       </section>
 
       <section className="media-centre reveal" id="media">
         <div className="media-head"><div><p className="section-tag">/ Media gallery</p><h2>Inside the<br />operation.</h2></div><p>Plant, fleet, testing and placement—captured from the work itself. Approved project videos can be added here without changing the experience.</p></div>
         <div className="media-grid">
-          <figure className="media-wide"><img src="/jz/fleet-premium.jpeg" alt="J Z Concrete production facility and mixer fleet" /><figcaption><b>Plant & fleet</b><span>Production ready</span></figcaption></figure>
+          <figure className="media-wide"><img src="/jz/campaign-truck-2026.jpeg" alt="J Z Concrete mixer truck at the production facility" /><figcaption><b>Plant & fleet</b><span>Production ready</span></figcaption></figure>
           <figure><img src="/jz/pump.jpeg" alt="Concrete pump used for placement" /><figcaption><b>Pumping</b><span>Placement capability</span></figcaption></figure>
           <figure><img src="/jz/pour.jpeg" alt="Concrete placement team at work" /><figcaption><b>On site</b><span>Coordinated pour</span></figcaption></figure>
           <figure><img src="/jz/slump.jpeg" alt="Concrete slump test" /><figcaption><b>Laboratory</b><span>Quality verification</span></figcaption></figure>
           <div className="video-ready"><span>VIDEO / READY</span><h3>Project film library</h3><p>This space is prepared for approved plant tours, project milestones and testimonial footage.</p><small>Video files awaiting client upload</small></div>
         </div>
-        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263777003547" target="_blank" rel="noreferrer">WhatsApp ↗</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
+        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp ↗</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
       </section>
 
       <section className="company-story reveal" id="about">
@@ -351,7 +352,7 @@ export default function Home() {
       </section>
 
       <section className="contact-suite reveal" id="quote">
-        <div className="contact-story"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /><div><p className="section-tag">/ Start the conversation</p><h2>Plan your<br />next pour.</h2><p>Choose Operations or Sales, then select WhatsApp, email or a phone call. The final button follows the method you choose.</p><p className="contact-tagline">If it’s not <b>JZ</b>, it’s not concrete.</p></div></div>
+        <div className="contact-story"><img src="/jz/operations-sales-team.jpeg" alt="J Z Concrete operations and sales team" /><div><p className="section-tag">/ Start the conversation</p><h2>Plan your<br />next pour.</h2><p>Choose Operations or Sales, then select WhatsApp, email or a phone call. The final button follows the method you choose.</p><p className="contact-tagline">If it’s not <b>JZ</b>, it’s not concrete.</p></div></div>
         <form className="enquiry-form" onSubmit={sendEnquiry}>
           <div className="form-head"><span>PROJECT ENQUIRY</span><b>01 / 03</b></div>
           <div className="form-grid">
@@ -362,7 +363,7 @@ export default function Home() {
             <label>Estimated volume<input readOnly value={`${volume.order} m³`} /></label>
             <label>Required pour date<input type="date" value={requiredDate} onChange={e => setRequiredDate(e.target.value)} /></label>
           </div>
-          <fieldset><legend>Contact team</legend><label><input type="radio" name="destination" value="operations" checked={destination === "operations"} onChange={e => setDestination(e.target.value)} /> Operations · +263 777 003 039</label><label><input type="radio" name="destination" value="sales" checked={destination === "sales"} onChange={e => setDestination(e.target.value)} /> Sales · +263 777 003 547</label></fieldset>
+          <fieldset><legend>Contact team</legend><label><input type="radio" name="destination" value="operations" checked={destination === "operations"} onChange={e => setDestination(e.target.value)} /> Operations · +263 774 661 555</label><label><input type="radio" name="destination" value="sales" checked={destination === "sales"} onChange={e => setDestination(e.target.value)} /> Sales · +263 776 506 885</label></fieldset>
           <fieldset><legend>How should J Z reply?</legend>{["WhatsApp", "Phone call", "Email"].map(mode => <label key={mode}><input type="radio" name="reply" value={mode} checked={replyMode === mode} onChange={e => setReplyMode(e.target.value)} /> {mode}</label>)}</fieldset>
           <label className="reply-detail">Your {replyMode === "Email" ? "email address" : "phone number"}<input required type={replyMode === "Email" ? "email" : "tel"} value={contactValue} onChange={e => setContactValue(e.target.value)} placeholder={replyMode === "Email" ? "name@company.com" : "+263 …"} /></label>
           <button className="submit-enquiry" type="submit"><span>{replyMode === "Phone call" ? "Call selected team" : "Prepare enquiry"}</span><b>{replyMode === "Email" ? "Open email ↗" : replyMode === "Phone call" ? "Start call ↗" : "Open WhatsApp ↗"}</b></button>
@@ -370,7 +371,7 @@ export default function Home() {
         </form>
       </section>
 
-      <a className="whatsapp-dock" href="https://wa.me/263777003039" target="_blank" rel="noreferrer" aria-label="Chat with J Z Concrete on WhatsApp"><i>WA</i><span>WhatsApp<br /><b>Sales online</b></span></a>
+      <a className="whatsapp-dock" href="https://wa.me/263776506885" target="_blank" rel="noreferrer" aria-label="Chat with J Z Concrete Sales on WhatsApp"><i>WA</i><span>WhatsApp<br /><b>Sales online</b></span></a>
 
       {adminOpen && <div className="admin-shell notranslate" role="dialog" aria-modal="true" aria-label="J Z invoice administration">
         <button className="admin-backdrop" aria-label="Close administration" onClick={() => setAdminOpen(false)} />
@@ -416,7 +417,7 @@ export default function Home() {
               <div className="invoice-totals"><span>Subtotal <b>{money(invoiceSubtotal)}</b></span><span>VAT ({Number(invoice.vat) || 0}%) <b>{money(invoiceVat)}</b></span><span>Additional tax ({Number(invoice.tax) || 0}%) <b>{money(invoiceTax)}</b></span><strong>Total <b>{money(invoiceTotal)}</b></strong></div>
               <div className="banking-preview"><small>BANKING DETAILS</small><div><span><b>Bank</b>{invoice.bank || "Add bank name"}</span><span><b>Account name</b>{invoice.accountName || "J Z Concrete"}</span><span><b>Account number</b>{invoice.accountNumber || "Add account number"}</span><span><b>Branch</b>{invoice.branch || "Add branch"}</span><span><b>SWIFT / Reference</b>{invoice.swift || "Add SWIFT or reference"}</span></div></div>
               <div className="invoice-notes"><small>NOTES</small><p>{invoice.notes}</p></div>
-              <footer><b>If it’s not JZ, it’s not concrete.</b><span>+263 777 003 039 · +263 777 003 547</span></footer>
+              <footer><b>If it’s not JZ, it’s not concrete.</b><span>Operations +263 774 661 555 · Sales +263 776 506 885</span></footer>
             </article>
           </div>
         </section>}
@@ -425,7 +426,7 @@ export default function Home() {
       <footer>
         <div className="footer-brand"><img src="/jz/logo-clean.jpeg" alt="" /><h2>J Z CONCRETE</h2><p>Building Zimbabwe’s future with international engineering excellence.</p></div>
         <div><small>EXPLORE</small><a href="#products">Concrete systems</a><a href="#quality">Quality assurance</a><a href="#projects">Projects</a><a href="#knowledge">Knowledge centre</a></div>
-        <div><small>CONTACT</small><a href="tel:+263777003039">+263 777 003 039</a><a href="tel:+263777003547">+263 777 003 547</a><span>Harare, Zimbabwe</span></div>
+        <div><small>CONTACT</small><a href="tel:+263774661555">Operations · +263 774 661 555</a><a href="tel:+263776506885">Sales · +263 776 506 885</a><span>Harare, Zimbabwe</span></div>
         <div className="footer-bottom"><span>© 2026 J Z Concrete</span><span>Engineered to perform.</span></div>
       </footer>
     </main>
