@@ -187,7 +187,7 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-mast"><span>JIANZHOU / ZIMBABWE</span><span>READY-MIX INFRASTRUCTURE</span><span>CONTROL SYSTEM 01</span></div>
-        <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" /><div className="hero-shade" /><div className="plant-tag"><i /> J Z FLEET<br /><b>PRODUCTION ONLINE</b></div></div>
+        <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" fetchPriority="high" /><div className="hero-shade" /><div className="plant-tag"><i /> J Z FLEET<br /><b>PRODUCTION ONLINE</b></div></div>
         <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
         <div className="hero-copy">
           <p className="eyebrow"><i /> {words.eyebrow}</p>
@@ -324,9 +324,9 @@ export default function Home() {
       <section className="projects reveal" id="projects">
         <div className="projects-head"><div><p className="section-tag">/ Field work</p><h2>Proof,<br />in concrete.</h2></div><p>Real production. Real logistics. Real placement environments.</p></div>
         <div className="project-gallery">
-          <figure className="project-main"><img src="/jz/site.jpeg" alt="Concrete placement on reinforced slab" /><figcaption><span>Structural concrete</span><b>Reinforced slab placement</b></figcaption></figure>
+          <figure className="project-main"><img src="/jz/plant.jpeg" alt="J Z Concrete production plant" /><figcaption><span>Production infrastructure</span><b>Controlled batching at scale</b></figcaption></figure>
+          <figure><img src="/jz/mixer.jpeg" alt="J Z Concrete ready-mix truck" /><figcaption><span>Fleet readiness</span><b>Concrete prepared for dispatch</b></figcaption></figure>
           <figure><img src="/jz/pour.jpeg" alt="Concrete pouring crew" /><figcaption><span>Placement support</span><b>Coordinated site pour</b></figcaption></figure>
-          <figure><img src="/jz/dam.jpeg" alt="Large scale concrete dam structure" /><figcaption><span>Infrastructure</span><b>High-volume applications</b></figcaption></figure>
         </div>
         <div className="project-gallery-more" aria-label="More J Z Concrete project work">
           <figure><img src="/jz/project-campus-01.jpeg" alt="J Z Concrete project under construction" /><figcaption><span>Project delivery</span><b>Concrete built for scale</b></figcaption></figure>
