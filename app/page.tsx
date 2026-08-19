@@ -189,7 +189,6 @@ export default function Home() {
         <div className="hero-mast"><span>J Z CONCRETE / ZIMBABWE</span><span>PREMIUM READY-MIX CONCRETE</span><span>ESTABLISHED FOR PERFORMANCE</span></div>
         <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" fetchPriority="high" /><div className="hero-shade" /></div>
         <div className="hero-copy">
-          <p className="eyebrow"><i /> {words.eyebrow}</p>
           <h1><span className="hero-word word-one">{words.headline[0]}</span><span className="hero-word word-two">{words.headline[1]}</span><em><span className="hero-word word-three">{words.headline[2]}</span><span className="hero-word word-four">{words.headline[3]}</span></em></h1>
           <p className="hero-lede">{words.hero}</p>
           <p className="brand-line">{words.tagline}</p>
