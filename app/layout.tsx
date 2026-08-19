@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Archivo, DM_Serif_Display, Space_Mono } from "next/font/google";
+import { Be_Vietnam_Pro, DM_Serif_Display, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({ variable: "--font-display", subsets: ["latin"] });
+const vietnam = Be_Vietnam_Pro({ variable: "--font-display", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const editorial = DM_Serif_Display({ variable: "--font-editorial", subsets: ["latin"], weight: "400" });
 const mono = Space_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "700"] });
 
@@ -26,5 +26,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${archivo.variable} ${editorial.variable} ${mono.variable}`}>{children}</body></html>;
+  return <html lang="en"><body className={`${vietnam.variable} ${editorial.variable} ${mono.variable}`}>{children}</body></html>;
 }

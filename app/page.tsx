@@ -331,8 +331,8 @@ export default function Home() {
       <section className="media-centre reveal" id="media">
         <div className="media-head"><div><p className="section-tag">/ Media gallery</p><h2>Inside the<br />operation.</h2></div><p>Plant, fleet, testing and placement—captured from the work itself. Approved project videos can be added here without changing the experience.</p></div>
         <div className="media-grid">
-          <figure className="media-wide"><img src="/jz/campaign-truck-2026.jpeg" alt="J Z Concrete mixer truck at the production facility" /><figcaption><b>Plant & fleet</b><span>Production ready</span></figcaption></figure>
-          <figure><img src="/jz/pump.jpeg" alt="Concrete pump used for placement" /><figcaption><b>Pumping</b><span>Placement capability</span></figcaption></figure>
+          <figure className="media-wide"><img src="/jz/fleet-premium.jpeg" alt="J Z Concrete production facility and mixer fleet" /><figcaption><b>Plant & fleet</b><span>Ready for major projects</span></figcaption></figure>
+          <figure><img src="/jz/mixer.jpeg" alt="J Z Concrete ready-mix truck" /><figcaption><b>Ready-mix delivery</b><span>Reliable fleet support</span></figcaption></figure>
           <figure><img src="/jz/pour.jpeg" alt="Concrete placement team at work" /><figcaption><b>On site</b><span>Coordinated pour</span></figcaption></figure>
           <figure><img src="/jz/slump.jpeg" alt="Concrete slump test" /><figcaption><b>Laboratory</b><span>Quality verification</span></figcaption></figure>
           <div className="video-ready"><span>VIDEO / READY</span><h3>Project film library</h3><p>This space is prepared for approved plant tours, project milestones and testimonial footage.</p><small>Video files awaiting client upload</small></div>
