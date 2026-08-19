@@ -19,12 +19,12 @@ const products = [
 const industries = ["Residential", "Commercial", "Industrial", "Mining", "Roads", "Bridges", "Airports", "Water", "Schools", "Hospitals", "Government", "Energy"];
 
 const capabilities = [
-  ["Production facilities", "Batching plants, aggregate handling, cement silos, control room, workshop and fleet yard.", "PLANT / 01", "facilities"],
-  ["Quality assurance", "Material inspection, moisture analysis, mix design, slump, cube and durability testing.", "LAB / 02", "quality"],
-  ["Logistics & fleet", "Mixer trucks, concrete pumps, service vehicles, GPS tracking and coordinated operations.", "MOVE / 03", "logistics"],
-  ["Safety culture", "Training, PPE standards, equipment inspection, emergency response and incident reporting.", "SAFE / 04", "why-jz"],
-  ["Sustainability", "Water recycling, dust control, waste reduction, energy efficiency and community investment.", "ESG / 05", "why-jz"],
-  ["Technical support", "Mix selection, pre-pour planning, placement guidance and project documentation.", "TECH / 06", "concrete-guide"],
+  ["Production facilities", "Batching plants, aggregate handling, cement silos, control room, workshop and fleet yard.", "Facilities", "facilities"],
+  ["Quality assurance", "Material inspection, moisture analysis, mix design, slump, cube and durability testing.", "Quality", "quality"],
+  ["Logistics & fleet", "Mixer trucks, concrete pumps, service vehicles, GPS tracking and coordinated operations.", "Delivery", "logistics"],
+  ["Safety culture", "Training, PPE standards, equipment inspection, emergency response and incident reporting.", "Safety", "why-jz"],
+  ["Sustainability", "Water recycling, dust control, waste reduction, energy efficiency and community investment.", "Responsibility", "why-jz"],
+  ["Technical support", "Mix selection, pre-pour planning, placement guidance and project documentation.", "Support", "concrete-guide"],
 ];
 
 const companyAreas = [
@@ -150,7 +150,7 @@ export default function Home() {
     window.setTimeout(() => setSettingsSaved(false), 2200);
   };
 
-  const words = { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Concrete infrastructure platform", headline:["We don’t","just pour.","We power","progress."], hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.", tagline:"If it’s not JZ, it’s not concrete." };
+  const words = { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Ready-mix concrete for Zimbabwe", headline:["Building","Zimbabwe’s","future.","Together."], hero:"Premium ready-mix concrete backed by quality assurance, reliable delivery and practical technical support for projects of every scale.", tagline:"If it’s not JZ, it’s not concrete." };
 
   const initialiseTranslator = () => {
     const googleApi = (window as unknown as { google?: { translate?: { TranslateElement: new (options: object, elementId: string) => object } } }).google;
@@ -186,9 +186,8 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-mast"><span>JIANZHOU / ZIMBABWE</span><span>READY-MIX INFRASTRUCTURE</span><span>CONTROL SYSTEM 01</span></div>
-        <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" fetchPriority="high" /><div className="hero-shade" /><div className="plant-tag"><i /> J Z FLEET<br /><b>PRODUCTION ONLINE</b></div></div>
-        <div className="blueprint" aria-hidden="true"><i /><i /><i /></div>
+        <div className="hero-mast"><span>J Z CONCRETE / ZIMBABWE</span><span>PREMIUM READY-MIX CONCRETE</span><span>ESTABLISHED FOR PERFORMANCE</span></div>
+        <div className="hero-visual"><img className="hero-image" src="/jz/fleet-premium.jpeg" alt="J Z Concrete batching plant and ready-mix fleet in Zimbabwe" fetchPriority="high" /><div className="hero-shade" /></div>
         <div className="hero-copy">
           <p className="eyebrow"><i /> {words.eyebrow}</p>
           <h1><span className="hero-word word-one">{words.headline[0]}</span><span className="hero-word word-two">{words.headline[1]}</span><em><span className="hero-word word-three">{words.headline[2]}</span><span className="hero-word word-four">{words.headline[3]}</span></em></h1>
@@ -199,12 +198,7 @@ export default function Home() {
             <a className="text-link" href="#calculator">Calculate volume <span>↓</span></a>
           </div>
         </div>
-        <div className="command-stack">
-          <article><small>PRODUCTION</small><b>INTELLIGENT</b><span><i /> ACTIVE</span></article>
-          <article><small>LABORATORY</small><b>CONTROLLED</b><span><i /> VERIFIED</span></article>
-          <article><small>DISPATCH</small><b>COORDINATED</b><span><i /> READY</span></article>
-        </div>
-        <div className="hero-rail"><span>01 — Production</span><span>02 — Quality</span><span>03 — Logistics</span><span>04 — Placement</span><b>SCROLL TO ENTER ↓</b></div>
+        <div className="hero-proof"><span><b>Premium quality</b>Concrete you can trust</span><span><b>Reliable delivery</b>Planned around your pour</span><span><b>Technical support</b>From selection to placement</span></div>
       </section>
 
       <aside className="contact-ribbon" aria-label="J Z Concrete direct contacts">
@@ -231,21 +225,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="operations-theatre reveal">
-        <div className="ops-stage">
-          <div className="ops-copy"><p className="section-tag">/ One connected operation</p><h2>PLANT.<br />LAB.<br />FLEET.<br /><span>FIELD.</span></h2><p>A concrete supply chain designed as one continuous engineering system—from raw material verification to the final placed structure.</p></div>
-          <div className="ops-orbit" aria-hidden="true"><i /><i /><i /><i /></div>
-          <figure className="ops-photo ops-plant"><img src="/jz/plant.jpeg" alt="J Z batching facility" /><figcaption>01 / PRODUCE</figcaption></figure>
-          <figure className="ops-photo ops-fleet"><img src="/jz/fleet-line.jpeg" alt="J Z concrete mixer fleet" /><figcaption>03 / MOBILISE</figcaption></figure>
-          <figure className="ops-photo ops-lab"><img src="/jz/slump.jpeg" alt="Concrete laboratory testing" /><figcaption>02 / VERIFY</figcaption></figure>
-          <div className="ops-axis"><span>RAW MATERIAL</span><i /><span>STRUCTURE</span></div>
+      <section className="project-journey reveal">
+        <div className="journey-intro"><p className="section-tag">/ One partner at every stage</p><h2>From our plant<br />to your project.</h2><p>Quality concrete depends on more than the mix. Our production, laboratory and delivery teams work together to support every pour with consistency and care.</p><a href="#quote">Plan your next pour <span>→</span></a></div>
+        <div className="journey-gallery">
+          <figure className="journey-main"><img src="/jz/plant.jpeg" alt="J Z Concrete production facility" /><figcaption><small>Production facilities</small><b>Consistent concrete starts here.</b></figcaption></figure>
+          <figure><img src="/jz/slump.jpeg" alt="Concrete quality testing" /><figcaption><small>Quality assurance</small><b>Every mix is checked.</b></figcaption></figure>
+          <figure><img src="/jz/fleet-premium.jpeg" alt="J Z Concrete mixer fleet" /><figcaption><small>Reliable delivery</small><b>Prepared for your programme.</b></figcaption></figure>
         </div>
       </section>
 
       <section className="capability-hub reveal">
         <div className="hub-head"><p className="section-tag">/ Integrated capability</p><h2>One partner.<br /><span>Every critical stage.</span></h2><p>International production discipline connected to practical, responsive support on Zimbabwean projects.</p></div>
         <div className="capability-tiles">
-          {capabilities.map(([title, copy, code, target], index) => <a href={`#${target}`} key={title} style={{"--delay": `${index * 70}ms`} as React.CSSProperties}><div className="tile-code">{code}</div><div className="tile-orbit"><i /><i /></div><h3>{title}</h3><p>{copy}</p><span className="tile-arrow">↗</span></a>)}
+          {capabilities.map(([title, copy, code, target], index) => <a href={`#${target}`} key={title} style={{"--delay": `${index * 70}ms`} as React.CSSProperties}><div className="tile-code">{code}</div><h3>{title}</h3><p>{copy}</p><span className="tile-arrow">↗</span></a>)}
         </div>
       </section>
 
@@ -256,7 +248,7 @@ export default function Home() {
       </section>
 
       <section className="process reveal" id="quality-process">
-        <div className="process-image"><img src="/jz/slump.jpeg" alt="Concrete slump testing" /><span>LAB / 01</span></div>
+        <div className="process-image"><img src="/jz/slump.jpeg" alt="Concrete slump testing" /><span>QUALITY ASSURANCE</span></div>
         <div className="process-copy">
           <p className="section-tag">/ From material to structure</p>
           <h2>Precision<br />at every stage.</h2>
