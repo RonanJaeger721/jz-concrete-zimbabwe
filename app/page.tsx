@@ -33,6 +33,10 @@ const companyAreas = [
   ["Careers", "quote"], ["News & media", "media"], ["Downloads", "downloads"], ["Customer enquiries", "quote"],
 ];
 
+const defaultTerms = "1. Quotations remain valid until the date shown.\n2. Supply is subject to confirmed mix design, site access and delivery schedule.\n3. The client must provide safe access, suitable off-loading or pumping conditions and an authorised representative on site.\n4. Concrete quantities are charged from approved delivery records.\n5. Variations, waiting time, returned concrete and additional services may be charged separately.\n6. Payment is due according to the terms shown on this document.";
+
+const defaultCompanySettings = { bank:"", accountName:"J Z Concrete", accountNumber:"", branch:"", swift:"", terms:defaultTerms };
+
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const [language, setLanguage] = useState<"EN" | "FR" | "ZH">("EN");
@@ -56,7 +60,9 @@ export default function Home() {
   const [adminUnlocked, setAdminUnlocked] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
   const [adminError, setAdminError] = useState("");
-  const [invoice, setInvoice] = useState({ type:"Invoice", number:`JZ-INV-${new Date().getFullYear()}-001`, date:new Date().toISOString().slice(0,10), due:"", client:"", company:"", address:"", description:"C25 Ready-Mix Concrete", quantity:"1", rate:"0", vat:"0", tax:"0", bank:"", accountName:"J Z Concrete", accountNumber:"", branch:"", swift:"", notes:"Thank you for choosing J Z Concrete." });
+  const [invoice, setInvoice] = useState({ type:"Invoice", number:`JZ-INV-${new Date().getFullYear()}-001`, date:new Date().toISOString().slice(0,10), due:"", client:"", company:"", address:"", clientPhone:"", clientEmail:"", taxReference:"", purchaseOrder:"", description:"C25 Ready-Mix Concrete", quantity:"1", rate:"0", vatMode:"Exclusive", vat:"15", tax:"0", notes:"Thank you for choosing J Z Concrete." });
+  const [companySettings, setCompanySettings] = useState(defaultCompanySettings);
+  const [settingsSaved, setSettingsSaved] = useState(false);
   useEffect(() => {
     const entranceTimer = window.setTimeout(() => setEntered(true), 80);
     const nodes = document.querySelectorAll(".reveal");
@@ -67,6 +73,10 @@ export default function Home() {
     const savedLanguage = document.cookie.match(/googtrans=\/en\/([^;]+)/)?.[1];
     if (savedLanguage === "fr") setLanguage("FR");
     if (savedLanguage === "zh-CN") setLanguage("ZH");
+    const savedCompanySettings = window.localStorage.getItem("jz-document-settings");
+    if (savedCompanySettings) {
+      try { setCompanySettings({ ...defaultCompanySettings, ...JSON.parse(savedCompanySettings) }); } catch { /* keep safe defaults */ }
+    }
     (window as unknown as { googleTranslateElementInit?: () => void }).googleTranslateElementInit = initialiseTranslator;
     return () => { observer.disconnect(); window.clearTimeout(entranceTimer); };
   }, []);
@@ -126,11 +136,19 @@ export default function Home() {
     }
   };
 
-  const invoiceSubtotal = Math.max(0, Number(invoice.quantity) || 0) * Math.max(0, Number(invoice.rate) || 0);
-  const invoiceVat = invoiceSubtotal * Math.max(0, Number(invoice.vat) || 0) / 100;
+  const invoiceLineAmount = Math.max(0, Number(invoice.quantity) || 0) * Math.max(0, Number(invoice.rate) || 0);
+  const invoiceVatRate = Math.max(0, Number(invoice.vat) || 0) / 100;
+  const invoiceSubtotal = invoice.vatMode === "Inclusive" && invoiceVatRate > 0 ? invoiceLineAmount / (1 + invoiceVatRate) : invoiceLineAmount;
+  const invoiceVat = invoice.vatMode === "No VAT" ? 0 : invoice.vatMode === "Inclusive" ? invoiceLineAmount - invoiceSubtotal : invoiceSubtotal * invoiceVatRate;
   const invoiceTax = invoiceSubtotal * Math.max(0, Number(invoice.tax) || 0) / 100;
-  const invoiceTotal = invoiceSubtotal + invoiceVat + invoiceTax;
+  const invoiceTotal = (invoice.vatMode === "Inclusive" ? invoiceLineAmount : invoiceSubtotal + invoiceVat) + invoiceTax;
   const money = (value:number) => new Intl.NumberFormat("en-US", { style:"currency", currency:"USD" }).format(value);
+
+  const saveCompanySettings = () => {
+    window.localStorage.setItem("jz-document-settings", JSON.stringify(companySettings));
+    setSettingsSaved(true);
+    window.setTimeout(() => setSettingsSaved(false), 2200);
+  };
 
   const words = { capability:"Capabilities", concrete:"Concrete", projects:"Projects", knowledge:"Knowledge", quote:"Request a quote", calculator:"Calculate volume", eyebrow:"Concrete infrastructure platform", headline:["We don’t","just pour.","We power","progress."], hero:"J Z Concrete connects intelligent production, laboratory control, coordinated fleet movement and technical support into one high-performance supply system.", tagline:"If it’s not JZ, it’s not concrete." };
 
@@ -188,6 +206,12 @@ export default function Home() {
         </div>
         <div className="hero-rail"><span>01 — Production</span><span>02 — Quality</span><span>03 — Logistics</span><span>04 — Placement</span><b>SCROLL TO ENTER ↓</b></div>
       </section>
+
+      <aside className="contact-ribbon" aria-label="J Z Concrete direct contacts">
+        <span>DIRECT PROJECT CONTACTS</span>
+        <a href="https://wa.me/263774661555" target="_blank" rel="noreferrer"><small>01 / OPERATIONS</small><b>0774 661 555</b><i>WhatsApp ↗</i></a>
+        <a href="https://wa.me/263776506885" target="_blank" rel="noreferrer"><small>02 / SALES</small><b>0776 506 885</b><i>WhatsApp ↗</i></a>
+      </aside>
 
       <section className="statement reveal" id="capability">
         <p className="section-tag">/ The Jianzhou standard</p>
@@ -330,8 +354,8 @@ export default function Home() {
       </section>
 
       <section className="why-jz reveal" id="why-jz">
-        <div className="why-image"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /></div>
-        <div><p className="section-tag">/ Why choose J Z</p><h2>More than a supplier.<br /><span>A project partner.</span></h2><ul><li><b>01</b> Intelligent production control</li><li><b>02</b> Laboratory-led quality assurance</li><li><b>03</b> Coordinated fleet and pumping support</li><li><b>04</b> Practical technical guidance</li><li><b>05</b> Safety and responsible operations</li><li><b>06</b> Concrete designed around the application</li></ul></div>
+        <figure className="why-image"><img src="/jz/campaign-tagline.jpeg" alt="If it’s not JZ, it’s not concrete" /><figcaption><span>THE J Z STANDARD</span><b>If it’s not JZ,<br />it’s not concrete.</b></figcaption></figure>
+        <div className="why-copy"><p className="section-tag">/ Why choose J Z</p><h2>More than a supplier.<br /><span>A project partner.</span></h2><p>From mix selection and laboratory verification to dispatch and placement support, J Z stays accountable across the critical stages of every pour.</p><ul><li><b>01</b> Intelligent production control</li><li><b>02</b> Laboratory-led quality assurance</li><li><b>03</b> Coordinated fleet and pumping support</li><li><b>04</b> Practical technical guidance</li><li><b>05</b> Safety and responsible operations</li><li><b>06</b> Concrete designed around the application</li></ul><div className="why-contacts"><a href="https://wa.me/263774661555" target="_blank" rel="noreferrer"><small>Operations</small>0774 661 555</a><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer"><small>Sales</small>0776 506 885</a></div></div>
       </section>
 
       <section className="knowledge reveal" id="knowledge">
@@ -394,29 +418,42 @@ export default function Home() {
                 <label>Client name<input value={invoice.client} onChange={e => setInvoice({...invoice,client:e.target.value})} placeholder="Client contact" /></label>
                 <label>Company<input value={invoice.company} onChange={e => setInvoice({...invoice,company:e.target.value})} placeholder="Customer company" /></label>
                 <label className="full">Billing address<textarea value={invoice.address} onChange={e => setInvoice({...invoice,address:e.target.value})} /></label>
+                <label>Client phone<input type="tel" value={invoice.clientPhone} onChange={e => setInvoice({...invoice,clientPhone:e.target.value})} placeholder="+263 …" /></label>
+                <label>Client email<input type="email" value={invoice.clientEmail} onChange={e => setInvoice({...invoice,clientEmail:e.target.value})} placeholder="accounts@client.com" /></label>
+                <label>Client tax / VAT number<input value={invoice.taxReference} onChange={e => setInvoice({...invoice,taxReference:e.target.value})} /></label>
+                <label>Purchase order / reference<input value={invoice.purchaseOrder} onChange={e => setInvoice({...invoice,purchaseOrder:e.target.value})} /></label>
                 <label className="full">Concrete grade / mix<select value={invoice.description} onChange={e => setInvoice({...invoice,description:e.target.value})}>{["C10 Ready-Mix Concrete","C15 Ready-Mix Concrete","C20 Ready-Mix Concrete","C25 Ready-Mix Concrete","C30 Ready-Mix Concrete","C35 Ready-Mix Concrete","Swimming Pool Mix","Waterproof Concrete Mix","High-Performance Concrete","Self-Compacting Concrete","Fibre-Reinforced Concrete","Shotcrete","Mortar / Custom Mix"].map(item => <option key={item}>{item}</option>)}</select></label>
                 <label>Quantity<input type="number" min="0" step="0.01" value={invoice.quantity} onChange={e => setInvoice({...invoice,quantity:e.target.value})} /></label>
                 <label>Rate (USD)<input type="number" min="0" step="0.01" value={invoice.rate} onChange={e => setInvoice({...invoice,rate:e.target.value})} /></label>
-                <label>VAT (%)<input type="number" min="0" step="0.01" value={invoice.vat} onChange={e => setInvoice({...invoice,vat:e.target.value})} /></label>
+                <label>VAT treatment<select value={invoice.vatMode} onChange={e => setInvoice({...invoice,vatMode:e.target.value})}><option>Exclusive</option><option>Inclusive</option><option>No VAT</option></select></label>
+                <label>VAT rate (%)<input type="number" min="0" step="0.01" disabled={invoice.vatMode === "No VAT"} value={invoice.vat} onChange={e => setInvoice({...invoice,vat:e.target.value})} /></label>
                 <label>Additional tax (%)<input type="number" min="0" step="0.01" value={invoice.tax} onChange={e => setInvoice({...invoice,tax:e.target.value})} /></label>
-                <div className="form-divider full"><span>BANKING DETAILS</span></div>
-                <label>Bank name<input value={invoice.bank} onChange={e => setInvoice({...invoice,bank:e.target.value})} placeholder="Bank name" /></label>
-                <label>Account name<input value={invoice.accountName} onChange={e => setInvoice({...invoice,accountName:e.target.value})} /></label>
-                <label>Account number<input value={invoice.accountNumber} onChange={e => setInvoice({...invoice,accountNumber:e.target.value})} /></label>
-                <label>Branch<input value={invoice.branch} onChange={e => setInvoice({...invoice,branch:e.target.value})} /></label>
-                <label className="full">SWIFT / reference<input value={invoice.swift} onChange={e => setInvoice({...invoice,swift:e.target.value})} /></label>
                 <label className="full">Notes<textarea value={invoice.notes} onChange={e => setInvoice({...invoice,notes:e.target.value})} /></label>
               </div>
+              <details className="company-settings">
+                <summary><span>Company defaults</span><b>Banking & terms ↘</b></summary>
+                <p>Enter these once. They are saved on this device and automatically applied to every invoice and quotation.</p>
+                <div className="invoice-field-grid">
+                  <label>Bank name<input value={companySettings.bank} onChange={e => setCompanySettings({...companySettings,bank:e.target.value})} placeholder="Bank name" /></label>
+                  <label>Account name<input value={companySettings.accountName} onChange={e => setCompanySettings({...companySettings,accountName:e.target.value})} /></label>
+                  <label>Account number<input value={companySettings.accountNumber} onChange={e => setCompanySettings({...companySettings,accountNumber:e.target.value})} /></label>
+                  <label>Branch<input value={companySettings.branch} onChange={e => setCompanySettings({...companySettings,branch:e.target.value})} /></label>
+                  <label className="full">SWIFT / reference<input value={companySettings.swift} onChange={e => setCompanySettings({...companySettings,swift:e.target.value})} /></label>
+                  <label className="full">Standard terms & conditions<textarea className="terms-input" value={companySettings.terms} onChange={e => setCompanySettings({...companySettings,terms:e.target.value})} /></label>
+                </div>
+                <button className="save-settings" type="button" onClick={saveCompanySettings}>{settingsSaved ? "Company defaults saved ✓" : "Save company defaults"}</button>
+              </details>
               <button className="print-invoice" type="button" onClick={() => window.print()}>Print / save PDF →</button>
               <small>Review every detail before issuing the invoice. Records are not stored by the website.</small>
             </form>
             <article className="invoice-sheet">
               <div className="invoice-brand"><img src="/jz/logo-clean.jpeg" alt="" /><div><b>J Z CONCRETE</b><span>Ready-mix concrete · Harare, Zimbabwe</span></div><h3>{invoice.type.toUpperCase()}</h3></div>
-              <div className="invoice-meta"><div><small>{invoice.type === "Invoice" ? "BILL TO" : "QUOTATION FOR"}</small><b>{invoice.company || "Customer company"}</b><span>{invoice.client || "Client name"}</span><span>{invoice.address || "Billing address"}</span></div><dl><dt>{invoice.type}</dt><dd>{invoice.number}</dd><dt>Date</dt><dd>{invoice.date || "—"}</dd><dt>{invoice.type === "Invoice" ? "Due" : "Valid until"}</dt><dd>{invoice.due || (invoice.type === "Invoice" ? "On receipt" : "To be confirmed")}</dd></dl></div>
-              <table><thead><tr><th>Description</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead><tbody><tr><td>{invoice.description || "Concrete supply"}</td><td>{invoice.quantity || "0"}</td><td>{money(Number(invoice.rate) || 0)}</td><td>{money(invoiceSubtotal)}</td></tr></tbody></table>
-              <div className="invoice-totals"><span>Subtotal <b>{money(invoiceSubtotal)}</b></span><span>VAT ({Number(invoice.vat) || 0}%) <b>{money(invoiceVat)}</b></span><span>Additional tax ({Number(invoice.tax) || 0}%) <b>{money(invoiceTax)}</b></span><strong>Total <b>{money(invoiceTotal)}</b></strong></div>
-              <div className="banking-preview"><small>BANKING DETAILS</small><div><span><b>Bank</b>{invoice.bank || "Add bank name"}</span><span><b>Account name</b>{invoice.accountName || "J Z Concrete"}</span><span><b>Account number</b>{invoice.accountNumber || "Add account number"}</span><span><b>Branch</b>{invoice.branch || "Add branch"}</span><span><b>SWIFT / Reference</b>{invoice.swift || "Add SWIFT or reference"}</span></div></div>
+              <div className="invoice-meta"><div><small>{invoice.type === "Invoice" ? "BILL TO" : "QUOTATION FOR"}</small><b>{invoice.company || "Customer company"}</b><span>{invoice.client || "Client name"}</span><span>{invoice.address || "Billing address"}</span><span>{[invoice.clientPhone,invoice.clientEmail].filter(Boolean).join(" · ") || "Client contact details"}</span><span>{invoice.taxReference ? `Tax / VAT: ${invoice.taxReference}` : ""}</span></div><dl><dt>{invoice.type}</dt><dd>{invoice.number}</dd><dt>Date</dt><dd>{invoice.date || "—"}</dd><dt>{invoice.type === "Invoice" ? "Due" : "Valid until"}</dt><dd>{invoice.due || (invoice.type === "Invoice" ? "On receipt" : "To be confirmed")}</dd><dt>PO / Reference</dt><dd>{invoice.purchaseOrder || "—"}</dd><dt>VAT basis</dt><dd>{invoice.vatMode}</dd></dl></div>
+              <table><thead><tr><th>Description</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead><tbody><tr><td>{invoice.description || "Concrete supply"}</td><td>{invoice.quantity || "0"}</td><td>{money(Number(invoice.rate) || 0)}</td><td>{money(invoiceLineAmount)}</td></tr></tbody></table>
+              <div className="invoice-totals"><span>{invoice.vatMode === "Inclusive" ? "Net subtotal" : "Subtotal"} <b>{money(invoiceSubtotal)}</b></span><span>VAT · {invoice.vatMode} ({invoice.vatMode === "No VAT" ? 0 : Number(invoice.vat) || 0}%) <b>{money(invoiceVat)}</b></span><span>Additional tax ({Number(invoice.tax) || 0}%) <b>{money(invoiceTax)}</b></span><strong>Total <b>{money(invoiceTotal)}</b></strong></div>
+              <div className="banking-preview"><small>BANKING DETAILS</small><div><span><b>Bank</b>{companySettings.bank || "Add bank name in Company defaults"}</span><span><b>Account name</b>{companySettings.accountName || "J Z Concrete"}</span><span><b>Account number</b>{companySettings.accountNumber || "Add account number in Company defaults"}</span><span><b>Branch</b>{companySettings.branch || "Add branch in Company defaults"}</span><span><b>SWIFT / Reference</b>{companySettings.swift || "Add SWIFT or reference in Company defaults"}</span></div></div>
               <div className="invoice-notes"><small>NOTES</small><p>{invoice.notes}</p></div>
+              <div className="invoice-terms"><small>TERMS & CONDITIONS</small><p>{companySettings.terms}</p></div>
               <footer><b>If it’s not JZ, it’s not concrete.</b><span>Operations +263 774 661 555 · Sales +263 776 506 885</span></footer>
             </article>
           </div>
