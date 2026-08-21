@@ -301,10 +301,10 @@ export default function Home() {
         <div className="calc-machine">
           <div className="scan"><div className="slab"><i /></div><span>RECTANGULAR SLAB / FOOTING</span></div>
           <div className="inputs">
-            <label>Length <span>metres</span><input value={length} onChange={e => setLength(e.target.value)} inputMode="decimal" /></label>
-            <label>Width <span>metres</span><input value={width} onChange={e => setWidth(e.target.value)} inputMode="decimal" /></label>
-            <label>Thickness <span>millimetres</span><input value={depth} onChange={e => setDepth(e.target.value)} inputMode="decimal" /></label>
-            <label>Identical pours <span>quantity</span><input value={quantity} onChange={e => setQuantity(e.target.value)} inputMode="numeric" /></label>
+            <label>Length <span>metres</span><input value={length} onFocus={e => e.currentTarget.select()} onClick={e => e.currentTarget.value === "0" && e.currentTarget.select()} onChange={e => setLength(e.target.value)} inputMode="decimal" /></label>
+            <label>Width <span>metres</span><input value={width} onFocus={e => e.currentTarget.select()} onClick={e => e.currentTarget.value === "0" && e.currentTarget.select()} onChange={e => setWidth(e.target.value)} inputMode="decimal" /></label>
+            <label>Thickness <span>millimetres</span><input value={depth} onFocus={e => e.currentTarget.select()} onClick={e => e.currentTarget.value === "0" && e.currentTarget.select()} onChange={e => setDepth(e.target.value)} inputMode="decimal" /></label>
+            <label>Identical pours <span>quantity</span><input value={quantity} onFocus={e => e.currentTarget.select()} onClick={e => e.currentTarget.value === "0" && e.currentTarget.select()} onChange={e => setQuantity(e.target.value)} inputMode="numeric" /></label>
             <label>Allowance <span>percent</span><select value={allowance} onChange={e => setAllowance(e.target.value)}><option value="0">0%</option><option value="5">5%</option><option value="10">10%</option></select></label>
           </div>
           <div className="calc-breakdown"><span>Calculated structure volume <b>{volume.base} m³</b></span><span>Selected allowance <b>{allowance}%</b></span></div>
