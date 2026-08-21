@@ -315,14 +315,11 @@ export default function Home() {
       <section className="projects reveal" id="projects">
         <div className="projects-head"><div><p className="section-tag">/ Field work</p><h2>Proof,<br />in concrete.</h2></div><p>Real production. Real logistics. Real placement environments.</p></div>
         <div className="project-gallery">
-          <figure className="project-main"><img src="/jz/plant.jpeg" alt="J Z Concrete production plant" /><figcaption><span>Production infrastructure</span><b>Controlled batching at scale</b></figcaption></figure>
-          <figure><img src="/jz/mixer.jpeg" alt="J Z Concrete ready-mix truck" /><figcaption><span>Fleet readiness</span><b>Concrete prepared for dispatch</b></figcaption></figure>
-          <figure><img src="/jz/pour.jpeg" alt="Concrete pouring crew" /><figcaption><span>Placement support</span><b>Coordinated site pour</b></figcaption></figure>
-        </div>
-        <div className="project-gallery-more" aria-label="More J Z Concrete project work">
-          <figure><img src="/jz/project-campus-01.jpeg" alt="J Z Concrete project under construction" /><figcaption><span>Project delivery</span><b>Concrete built for scale</b></figcaption></figure>
+          <figure className="project-main"><img src="/jz/project-campus-01.jpeg" alt="J Z Concrete project under construction" /><figcaption><span>Project delivery</span><b>Concrete built for scale</b></figcaption></figure>
           <figure><img src="/jz/project-campus-02.jpeg" alt="Large concrete development under construction" /><figcaption><span>Detailed execution</span><b>Care at every stage</b></figcaption></figure>
           <figure><img src="/jz/project-campus-03.jpeg" alt="Curved concrete structures under construction" /><figcaption><span>Precision</span><b>Complex structural work</b></figcaption></figure>
+        </div>
+        <div className="project-gallery-more single-project" aria-label="More J Z Concrete project work">
           <figure><img src="/jz/project-campus-04.jpeg" alt="Major circular concrete structure under construction" /><figcaption><span>Capability</span><b>Projects of every scale</b></figcaption></figure>
         </div>
       </section>
@@ -330,10 +327,9 @@ export default function Home() {
       <section className="media-centre reveal" id="media">
         <div className="media-head"><div><p className="section-tag">/ Media gallery</p><h2>Inside the<br />operation.</h2></div><p>Plant, fleet, testing and placement—captured from the work itself. Approved project videos can be added here without changing the experience.</p></div>
         <div className="media-grid">
-          <figure className="media-wide"><img src="/jz/fleet-premium.jpeg" alt="J Z Concrete production facility and mixer fleet" /><figcaption><b>Plant & fleet</b><span>Ready for major projects</span></figcaption></figure>
-          <figure><img src="/jz/mixer.jpeg" alt="J Z Concrete ready-mix truck" /><figcaption><b>Ready-mix delivery</b><span>Reliable fleet support</span></figcaption></figure>
-          <figure><img src="/jz/pour.jpeg" alt="Concrete placement team at work" /><figcaption><b>On site</b><span>Coordinated pour</span></figcaption></figure>
-          <figure><img src="/jz/slump.jpeg" alt="Concrete slump test" /><figcaption><b>Laboratory</b><span>Quality verification</span></figcaption></figure>
+          <figure className="media-wide"><img src="/jz/campaign-truck-2026.jpeg" alt="J Z Concrete branded mixer truck at the production facility" /><figcaption><b>Ready-mix delivery</b><span>Building tomorrow, today</span></figcaption></figure>
+          <figure><img src="/jz/site.jpeg" alt="Concrete pump placing a reinforced structural slab" /><figcaption><b>On site</b><span>Coordinated placement</span></figcaption></figure>
+          <figure><img src="/jz/dam.jpeg" alt="Large concrete water infrastructure project" /><figcaption><b>Infrastructure</b><span>Engineered for demanding structures</span></figcaption></figure>
           <div className="video-ready"><span>VIDEO / READY</span><h3>Project film library</h3><p>This space is prepared for approved plant tours, project milestones and testimonial footage.</p><small>Video files awaiting client upload</small></div>
         </div>
         <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp ↗</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
