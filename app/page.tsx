@@ -182,7 +182,7 @@ export default function Home() {
           <a href="#knowledge" onClick={() => setMenu(false)}>{words.knowledge}</a>
         </nav>
         <div className="language-switch notranslate" role="group" aria-label="Change language">{(["EN","FR","ZH"] as const).map(code => <button className={language === code ? "active" : ""} onClick={() => changeLanguage(code)} key={code} aria-pressed={language === code}>{code === "ZH" ? "中文" : code}</button>)}</div>
-        <a className="nav-cta" href="#quote">Request a quote <span>↗</span></a>
+        <a className="nav-cta" href="#quote">Request a quote <span>→</span></a>
         <button className="menu" onClick={() => setMenu(!menu)} aria-label="Toggle menu">{menu ? "Close" : "Menu"}</button>
       </header>
 
@@ -203,8 +203,8 @@ export default function Home() {
 
       <aside className="contact-ribbon" aria-label="J Z Concrete direct contacts">
         <span>DIRECT PROJECT CONTACTS</span>
-        <article className="contact-card"><small>01 / OPERATIONS</small><b>0774 661 555</b><div><a href="https://wa.me/263774661555" target="_blank" rel="noreferrer">WhatsApp ↗</a><a href="mailto:operations@jzconcrete.co.zw">operations@jzconcrete.co.zw ↗</a></div></article>
-        <article className="contact-card"><small>02 / SALES</small><b>0776 506 885</b><div><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp ↗</a><a href="mailto:sales@jzconcrete.co.zw">sales@jzconcrete.co.zw ↗</a></div></article>
+        <article className="contact-card"><small>01 / OPERATIONS</small><b>0774 661 555</b><div><a href="https://wa.me/263774661555" target="_blank" rel="noreferrer">WhatsApp →</a><a href="mailto:operations@jzconcrete.co.zw">operations@jzconcrete.co.zw →</a></div></article>
+        <article className="contact-card"><small>02 / SALES</small><b>0776 506 885</b><div><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp →</a><a href="mailto:sales@jzconcrete.co.zw">sales@jzconcrete.co.zw →</a></div></article>
       </aside>
 
       <section className="statement reveal" id="capability">
@@ -212,7 +212,7 @@ export default function Home() {
         <h2>Engineered for the pour.<br /><span>Proven in the structure.</span></h2>
         <div className="statement-grid">
           <p>Every cubic metre is controlled through material checks, mix design, automated batching, coordinated delivery and technical support—giving the project team confidence from order to placement.</p>
-          <a href="#quality">Explore quality control <span>↗</span></a>
+          <a href="#quality">Explore quality control <span>→</span></a>
         </div>
       </section>
 
@@ -237,7 +237,7 @@ export default function Home() {
       <section className="capability-hub reveal">
         <div className="hub-head"><p className="section-tag">/ Integrated capability</p><h2>One partner.<br /><span>Every critical stage.</span></h2><p>International production discipline connected to practical, responsive support on Zimbabwean projects.</p></div>
         <div className="capability-tiles">
-          {capabilities.map(([title, copy, code, target], index) => <a href={`#${target}`} key={title} style={{"--delay": `${index * 70}ms`} as React.CSSProperties}><div className="tile-code">{code}</div><h3>{title}</h3><p>{copy}</p><span className="tile-arrow">↗</span></a>)}
+          {capabilities.map(([title, copy, code, target], index) => <a href={`#${target}`} key={title} style={{"--delay": `${index * 70}ms`} as React.CSSProperties}><div className="tile-code">{code}</div><h3>{title}</h3><p>{copy}</p><span className="tile-arrow">View</span></a>)}
         </div>
       </section>
 
@@ -333,7 +333,7 @@ export default function Home() {
           <figure><img src="/jz/dam.jpeg" alt="Large concrete water infrastructure project" /><figcaption><b>Infrastructure</b><span>Engineered for demanding structures</span></figcaption></figure>
           <div className="video-ready"><span>VIDEO / READY</span><h3>Project film library</h3><p>This space is prepared for approved plant tours, project milestones and testimonial footage.</p><small>Video files awaiting client upload</small></div>
         </div>
-        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp ↗</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
+        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp →</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
       </section>
 
       <section className="company-story reveal" id="about">
@@ -349,7 +349,7 @@ export default function Home() {
       <section className="knowledge reveal" id="knowledge">
         <div className="knowledge-title"><p className="section-tag">/ Technical knowledge centre</p><h2>Better concrete<br />starts before<br />the truck arrives.</h2></div>
         <div className="articles">
-          {["Concrete grades explained", "C15 vs C20 vs C25 vs C30", "How to cure concrete", "Slump testing explained", "How much concrete do I need?"].map((x,i) => <a href="#quote" key={x}><span>0{i+1}</span><h3>{x}</h3><b>Read guide ↗</b></a>)}
+          {["Concrete grades explained", "C15 vs C20 vs C25 vs C30", "How to cure concrete", "Slump testing explained", "How much concrete do I need?"].map((x,i) => <a href="#quote" key={x}><span>0{i+1}</span><h3>{x}</h3><b>Read guide →</b></a>)}
         </div>
       </section>
 
@@ -360,7 +360,7 @@ export default function Home() {
 
       <section className="company-map reveal">
         <div className="map-title"><p className="section-tag">/ Complete company platform</p><h2>Explore the<br />J Z ecosystem.</h2><p>Built to become both a sales platform and a technical resource centre for contractors, engineers, architects, developers, mines and public agencies.</p></div>
-        <div className="map-links">{companyAreas.map(([item, target], i) => <a href={`#${target}`} key={item}><span>{String(i + 1).padStart(2,"0")}</span>{item}<b>↗</b></a>)}</div>
+        <div className="map-links">{companyAreas.map(([item, target], i) => <a href={`#${target}`} key={item}><span>{String(i + 1).padStart(2,"0")}</span>{item}<b>View</b></a>)}</div>
       </section>
 
       <section className="contact-suite reveal" id="quote">
@@ -378,7 +378,7 @@ export default function Home() {
           <fieldset><legend>Contact team</legend><label><input type="radio" name="destination" value="operations" checked={destination === "operations"} onChange={e => setDestination(e.target.value)} /> Operations · +263 774 661 555</label><label><input type="radio" name="destination" value="sales" checked={destination === "sales"} onChange={e => setDestination(e.target.value)} /> Sales · +263 776 506 885</label></fieldset>
           <fieldset><legend>How should J Z reply?</legend>{["WhatsApp", "Phone call", "Email"].map(mode => <label key={mode}><input type="radio" name="reply" value={mode} checked={replyMode === mode} onChange={e => setReplyMode(e.target.value)} /> {mode}</label>)}</fieldset>
           <label className="reply-detail">Your {replyMode === "Email" ? "email address" : "phone number"}<input required type={replyMode === "Email" ? "email" : "tel"} value={contactValue} onChange={e => setContactValue(e.target.value)} placeholder={replyMode === "Email" ? "name@company.com" : "+263 …"} /></label>
-          <button className="submit-enquiry" type="submit"><span>{replyMode === "Phone call" ? "Call selected team" : "Prepare enquiry"}</span><b>{replyMode === "Email" ? "Open email ↗" : replyMode === "Phone call" ? "Start call ↗" : "Open WhatsApp ↗"}</b></button>
+          <button className="submit-enquiry" type="submit"><span>{replyMode === "Phone call" ? "Call selected team" : "Prepare enquiry"}</span><b>{replyMode === "Email" ? "Open email →" : replyMode === "Phone call" ? "Start call →" : "Open WhatsApp →"}</b></button>
           <small>Nothing is sent automatically. You can review the prepared message before sending it.</small>
         </form>
       </section>
