@@ -92,6 +92,7 @@ export default function Home() {
   const sendEnquiry = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const number = destination === "operations" ? "263774661555" : "263776506885";
+    const teamEmail = destination === "operations" ? "operations@jzconcrete.co.zw" : "sales@jzconcrete.co.zw";
     const message = [
       "J Z Concrete website enquiry",
       `Name: ${contactName}`,
@@ -107,7 +108,7 @@ export default function Home() {
       return;
     }
     if (replyMode === "Email") {
-      window.location.href = `mailto:jianzhou01@gmail.com?subject=${encodeURIComponent("J Z Concrete project enquiry")}&body=${encodeURIComponent(message)}`;
+      window.location.href = `mailto:${teamEmail}?subject=${encodeURIComponent("J Z Concrete project enquiry")}&body=${encodeURIComponent(message)}`;
       return;
     }
     window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
@@ -202,8 +203,8 @@ export default function Home() {
 
       <aside className="contact-ribbon" aria-label="J Z Concrete direct contacts">
         <span>DIRECT PROJECT CONTACTS</span>
-        <a href="https://wa.me/263774661555" target="_blank" rel="noreferrer"><small>01 / OPERATIONS</small><b>0774 661 555</b><i>WhatsApp ↗</i></a>
-        <a href="https://wa.me/263776506885" target="_blank" rel="noreferrer"><small>02 / SALES</small><b>0776 506 885</b><i>WhatsApp ↗</i></a>
+        <article className="contact-card"><small>01 / OPERATIONS</small><b>0774 661 555</b><div><a href="https://wa.me/263774661555" target="_blank" rel="noreferrer">WhatsApp ↗</a><a href="mailto:operations@jzconcrete.co.zw">operations@jzconcrete.co.zw ↗</a></div></article>
+        <article className="contact-card"><small>02 / SALES</small><b>0776 506 885</b><div><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp ↗</a><a href="mailto:sales@jzconcrete.co.zw">sales@jzconcrete.co.zw ↗</a></div></article>
       </aside>
 
       <section className="statement reveal" id="capability">
@@ -227,9 +228,9 @@ export default function Home() {
       <section className="project-journey reveal">
         <div className="journey-intro"><p className="section-tag">/ One partner at every stage</p><h2>From our plant<br />to your project.</h2><p>Quality concrete depends on more than the mix. Our production, laboratory and delivery teams work together to support every pour with consistency and care.</p><a href="#quote">Plan your next pour <span>→</span></a></div>
         <div className="journey-gallery">
-          <figure className="journey-main"><img src="/jz/plant.jpeg" alt="J Z Concrete production facility" /><figcaption><small>Production facilities</small><b>Consistent concrete starts here.</b></figcaption></figure>
-          <figure><img src="/jz/slump.jpeg" alt="Concrete quality testing" /><figcaption><small>Quality assurance</small><b>Every mix is checked.</b></figcaption></figure>
-          <figure><img src="/jz/fleet-premium.jpeg" alt="J Z Concrete mixer fleet" /><figcaption><small>Reliable delivery</small><b>Prepared for your programme.</b></figcaption></figure>
+          <figure className="journey-main"><img src="/jz/project-rebar.jpeg" alt="Reinforced concrete slab prepared for placement" /><figcaption><small>Project preparation</small><b>Precision before the pour.</b></figcaption></figure>
+          <figure><img src="/jz/project-finish.jpeg" alt="Concrete slab being placed and finished" /><figcaption><small>Placement support</small><b>Care through every stage.</b></figcaption></figure>
+          <figure><img src="/jz/project-placement.jpeg" alt="Concrete pump placing a large structural slab" /><figcaption><small>Pumping capability</small><b>Prepared for the programme.</b></figcaption></figure>
         </div>
       </section>
 
@@ -247,7 +248,7 @@ export default function Home() {
       </section>
 
       <section className="process reveal" id="quality-process">
-        <div className="process-image"><img src="/jz/slump.jpeg" alt="Concrete slump testing" /><span>QUALITY ASSURANCE</span></div>
+        <div className="process-image"><img src="/jz/pour.jpeg" alt="Concrete placement team working under site control" /><span>CONTROLLED PLACEMENT</span></div>
         <div className="process-copy">
           <p className="section-tag">/ From material to structure</p>
           <h2>Precision<br />at every stage.</h2>
@@ -450,7 +451,7 @@ export default function Home() {
       <footer>
         <div className="footer-brand"><img src="/jz/logo-clean.jpeg" alt="" /><h2>J Z CONCRETE</h2><p>Building Zimbabwe’s future with international engineering excellence.</p></div>
         <div><small>EXPLORE</small><a href="#products">Concrete systems</a><a href="#quality">Quality assurance</a><a href="#projects">Projects</a><a href="#knowledge">Knowledge centre</a></div>
-        <div><small>CONTACT</small><a href="tel:+263774661555">Operations · +263 774 661 555</a><a href="tel:+263776506885">Sales · +263 776 506 885</a><span>Harare, Zimbabwe</span></div>
+        <div><small>CONTACT</small><a href="tel:+263774661555">Operations · +263 774 661 555</a><a href="mailto:operations@jzconcrete.co.zw">operations@jzconcrete.co.zw</a><a href="tel:+263776506885">Sales · +263 776 506 885</a><a href="mailto:sales@jzconcrete.co.zw">sales@jzconcrete.co.zw</a><span>Harare, Zimbabwe</span></div>
         <div className="footer-bottom"><span>© 2026 J Z Concrete</span><span>Engineered to perform.</span></div>
       </footer>
     </main>
