@@ -261,10 +261,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="client-trust reveal" id="testimonials" aria-label="Companies working with J Z Concrete">
-        <span>ASA Construction</span>
-        <span>Greenfox Investments</span>
-        <span>Squad Help</span>
+      <section className="client-trust reveal" id="testimonials" aria-labelledby="client-testimonials-title">
+        <h2 id="client-testimonials-title">Testimonials</h2>
+        <div className="client-testimonials">
+          <article><p>“J Z Concrete did an excellent job. The quality of their work and the professionalism of their team stood out from beginning to end.”</p><b>ASA Construction</b></article>
+          <article><p>“We truly appreciate the work J Z Concrete delivered. Their reliability and commitment gave us confidence throughout the project.”</p><b>Greenfox Investments</b></article>
+          <article><p>“They really know what they are doing. The result went beyond what we expected, and the entire experience was handled exceptionally well.”</p><b>Squad Help</b></article>
+        </div>
       </section>
 
       <section className="products reveal" id="products">
