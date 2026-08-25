@@ -269,10 +269,9 @@ export default function Home() {
         </header>
         <div className="testimonial-ledger">
           {[
-            ["01", "J Z approaches every pour with the discipline serious projects demand. Communication is direct, planning is practical and the team understands that timing matters on site.", "Farai Nyamutswa", "Managing Director · Mupfumi Buildworks"],
-            ["02", "For a developer, consistency is everything. The support around mix selection and delivery planning gives us greater confidence before work begins.", "Ruvimbo Dube", "Founder · Matobo Crest Developments"],
-            ["03", "Their focus on testing, controlled production and technical coordination is exactly what engineers want to see from a ready-mix partner.", "Eng. Tatenda Chirenje", "Principal Engineer · Northstar Civil Studio"],
-            ["04", "J Z combines international production thinking with a clear understanding of local construction realities. That balance makes collaboration efficient.", "Wei Zhang", "Projects Director · Eastbridge International"],
+            ["01", "J Z approaches every pour with the discipline serious projects demand. Communication is direct, planning is practical and the team understands that timing matters on site.", "Farai Nyamutswa", "Managing Director · ASA Construction"],
+            ["02", "For a developer, consistency is everything. The support around mix selection and delivery planning gives us greater confidence before work begins.", "Ruvimbo Dube", "Founder · Greenfox Investments"],
+            ["03", "Their focus on testing, controlled production and technical coordination is exactly what serious projects need from a ready-mix partner.", "Eng. Tatenda Chirenje", "Project Consultant · Squad Help"],
           ].map(([n, quote, name, role]) => <article key={n}>
             <span>{n}</span><blockquote>“{quote}”</blockquote><footer><b>{name}</b><small>{role}</small></footer>
           </article>)}
