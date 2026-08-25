@@ -261,6 +261,24 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="testimonials reveal" id="testimonials" aria-labelledby="testimonial-title">
+        <header className="testimonial-heading">
+          <p className="section-tag">/ Trusted on demanding projects</p>
+          <h2 id="testimonial-title">Confidence,<br /><span>poured into every partnership.</span></h2>
+          <div><b>Draft testimonials</b><p>Temporary sample voices for layout approval. Replace with verified client testimonials before final sign-off.</p></div>
+        </header>
+        <div className="testimonial-ledger">
+          {[
+            ["01", "J Z approaches every pour with the discipline serious projects demand. Communication is direct, planning is practical and the team understands that timing matters on site.", "Tendai Moyo", "Director · Harare construction business"],
+            ["02", "For a developer, consistency is everything. The support around mix selection and delivery planning gives us greater confidence before work begins.", "Nyasha Dube", "Property developer · Bulawayo"],
+            ["03", "Their focus on testing, controlled production and technical coordination is exactly what engineers want to see from a ready-mix partner.", "Eng. Tariro Chikowore", "Civil engineer · Zimbabwe"],
+            ["04", "J Z combines international production thinking with a clear understanding of local construction realities. That balance makes collaboration efficient.", "Daniel Wu", "International project consultant"],
+          ].map(([n, quote, name, role]) => <article key={n}>
+            <span>{n}</span><blockquote>“{quote}”</blockquote><footer><b>{name}</b><small>{role}</small></footer>
+          </article>)}
+        </div>
+      </section>
+
       <section className="products reveal" id="products">
         <div className="product-head"><div><p className="section-tag">/ Concrete systems</p><h2>Specified for<br /><i>the real world.</i></h2></div><p>From residential slabs to mining and public infrastructure, our mix portfolio is built around the demands of the structure, site and programme.</p></div>
         <div className="concrete-guide" id="concrete-guide">
