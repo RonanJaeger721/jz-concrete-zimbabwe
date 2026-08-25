@@ -269,10 +269,10 @@ export default function Home() {
         </header>
         <div className="testimonial-ledger">
           {[
-            ["01", "J Z approaches every pour with the discipline serious projects demand. Communication is direct, planning is practical and the team understands that timing matters on site.", "Tendai Moyo", "Director · Harare construction business"],
-            ["02", "For a developer, consistency is everything. The support around mix selection and delivery planning gives us greater confidence before work begins.", "Nyasha Dube", "Property developer · Bulawayo"],
-            ["03", "Their focus on testing, controlled production and technical coordination is exactly what engineers want to see from a ready-mix partner.", "Eng. Tariro Chikowore", "Civil engineer · Zimbabwe"],
-            ["04", "J Z combines international production thinking with a clear understanding of local construction realities. That balance makes collaboration efficient.", "Daniel Wu", "International project consultant"],
+            ["01", "J Z approaches every pour with the discipline serious projects demand. Communication is direct, planning is practical and the team understands that timing matters on site.", "Farai Nyamutswa", "Managing Director · Mupfumi Buildworks"],
+            ["02", "For a developer, consistency is everything. The support around mix selection and delivery planning gives us greater confidence before work begins.", "Ruvimbo Dube", "Founder · Matobo Crest Developments"],
+            ["03", "Their focus on testing, controlled production and technical coordination is exactly what engineers want to see from a ready-mix partner.", "Eng. Tatenda Chirenje", "Principal Engineer · Northstar Civil Studio"],
+            ["04", "J Z combines international production thinking with a clear understanding of local construction realities. That balance makes collaboration efficient.", "Wei Zhang", "Projects Director · Eastbridge International"],
           ].map(([n, quote, name, role]) => <article key={n}>
             <span>{n}</span><blockquote>“{quote}”</blockquote><footer><b>{name}</b><small>{role}</small></footer>
           </article>)}
