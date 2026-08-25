@@ -261,21 +261,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="testimonials reveal" id="testimonials" aria-labelledby="testimonial-title">
-        <header className="testimonial-heading">
-          <p className="section-tag">/ Trusted on demanding projects</p>
-          <h2 id="testimonial-title">Confidence,<br /><span>poured into every partnership.</span></h2>
-          <div><b>Draft testimonials</b><p>Temporary sample voices for layout approval. Replace with verified client testimonials before final sign-off.</p></div>
-        </header>
-        <div className="testimonial-ledger">
-          {[
-            ["01", "J Z approaches every pour with the discipline serious projects demand. Communication is direct, planning is practical and the team understands that timing matters on site.", "Farai Nyamutswa", "Managing Director · ASA Construction"],
-            ["02", "For a developer, consistency is everything. The support around mix selection and delivery planning gives us greater confidence before work begins.", "Ruvimbo Dube", "Founder · Greenfox Investments"],
-            ["03", "Their focus on testing, controlled production and technical coordination is exactly what serious projects need from a ready-mix partner.", "Eng. Tatenda Chirenje", "Project Consultant · Squad Help"],
-          ].map(([n, quote, name, role]) => <article key={n}>
-            <span>{n}</span><blockquote>“{quote}”</blockquote><footer><b>{name}</b><small>{role}</small></footer>
-          </article>)}
-        </div>
+      <section className="client-trust reveal" id="testimonials" aria-label="Companies working with J Z Concrete">
+        <span>ASA Construction</span>
+        <span>Greenfox Investments</span>
+        <span>Squad Help</span>
       </section>
 
       <section className="products reveal" id="products">

@@ -179,3 +179,7 @@ body{font-family:var(--font-display),Arial,sans-serif;font-weight:400;letter-spa
 .testimonial-ledger footer small{margin:0}
 .testimonial-ledger article:last-child{grid-column:1/-1;min-height:320px;border-right:0}.testimonial-ledger article:last-child blockquote{max-width:980px;margin-top:48px;font-size:clamp(25px,2.5vw,38px)}
 @media(max-width:800px){.testimonial-ledger article:last-child{grid-column:auto;min-height:0}.testimonial-ledger article:last-child blockquote{margin:36px 0 32px;font-size:23px}}
+
+/* Approved company names only. */
+.client-trust{display:grid;grid-template-columns:repeat(3,1fr);margin:10px;padding:18px 6vw;border-radius:58px;background:#fff;color:#10202c;box-shadow:0 24px 70px rgba(5,15,24,.1)}.client-trust span{display:grid;place-items:center;min-height:190px;padding:28px;text-align:center;border-right:1px solid #d9dde0;font:600 clamp(20px,2.15vw,34px)/1.05 var(--font-display),Arial,sans-serif;letter-spacing:-.025em}.client-trust span:last-child{border-right:0}.client-trust span:after{content:"";width:34px;height:2px;margin-top:22px;background:var(--red);transition:width .35s ease}.client-trust span:hover:after{width:72px}
+@media(max-width:800px){.client-trust{grid-template-columns:1fr;margin:6px;padding:14px 22px;border-radius:28px}.client-trust span{min-height:118px;padding:24px 10px;border-right:0;border-bottom:1px solid #d9dde0;font-size:24px}.client-trust span:last-child{border-bottom:0}.client-trust span:after{margin-top:16px}}
