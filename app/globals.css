@@ -191,3 +191,7 @@ body{font-family:var(--font-display),Arial,sans-serif;font-weight:400;letter-spa
 /* Keep company-story descriptions in an intentional readable column. */
 .story-copy li p{margin:0;color:#aeb9c0;font-size:14px;line-height:1.55}
 @media(max-width:800px){.story-copy li{grid-template-columns:30px minmax(0,1fr)!important;align-items:start;column-gap:16px!important;row-gap:8px!important}.story-copy li b{grid-column:1;grid-row:1/3}.story-copy li span{grid-column:2!important;grid-row:1}.story-copy li p{grid-column:2;grid-row:2;width:100%;max-width:32ch;font-size:15px;line-height:1.55}}
+
+/* Confirmed social channels. */
+.social-bar .instagram-link{background:#d62976;color:#fff}.social-bar .facebook-link{background:#1877f2;color:#fff}.social-bar a{transition:transform .3s,filter .3s}.social-bar a:hover{transform:translateY(-2px);filter:brightness(1.08)}footer{grid-template-columns:1.7fr 1fr 1.25fr .75fr;gap:5vw}.footer-social a{display:flex;justify-content:space-between;gap:20px;padding-bottom:9px;border-bottom:1px solid #292b2d;color:#d4d7d9}.footer-social a:hover{color:#fff;border-bottom-color:var(--red)}.footer-social a span{color:var(--red)}
+@media(max-width:800px){footer{grid-template-columns:1fr}.footer-social{padding-top:4px}.footer-social a{max-width:260px}.social-bar a{font-size:9px}}

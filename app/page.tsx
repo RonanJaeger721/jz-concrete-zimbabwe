@@ -342,7 +342,7 @@ export default function Home() {
           <figure><img src="/jz/dam.jpeg" alt="Large concrete water infrastructure project" /><figcaption><b>Infrastructure</b><span>Engineered for demanding structures</span></figcaption></figure>
           <div className="video-ready"><span>VIDEO / READY</span><h3>Project film library</h3><p>This space is prepared for approved plant tours, project milestones and testimonial footage.</p><small>Video files awaiting client upload</small></div>
         </div>
-        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp →</a><span className="pending-social">Facebook · Instagram · LinkedIn <b>links awaiting confirmation</b></span></div>
+        <div className="social-bar"><span>FOLLOW J Z CONCRETE</span><a href="https://wa.me/263776506885" target="_blank" rel="noreferrer">WhatsApp →</a><a className="instagram-link" href="https://www.instagram.com/jzconcrete.co.zw?igsi=OHg5ajd2Y2s2bnZh" target="_blank" rel="noreferrer">Instagram →</a><a className="facebook-link" href="https://www.facebook.com/share/1Eg2TbDwjy/" target="_blank" rel="noreferrer">Facebook →</a></div>
       </section>
 
       <section className="company-story reveal" id="about">
@@ -461,6 +461,7 @@ export default function Home() {
         <div className="footer-brand"><img src="/jz/logo-clean.jpeg" alt="" /><h2>J Z CONCRETE</h2><p>Building Zimbabwe’s future with international engineering excellence.</p></div>
         <div><small>EXPLORE</small><a href="#products">Concrete systems</a><a href="#quality">Quality assurance</a><a href="#projects">Projects</a><a href="#knowledge">Knowledge centre</a></div>
         <div><small>CONTACT</small><a href="tel:+263774661555">Operations · +263 774 661 555</a><a href="mailto:operations@jzconcrete.co.zw">operations@jzconcrete.co.zw</a><a href="tel:+263776506885">Sales · +263 776 506 885</a><a href="mailto:sales@jzconcrete.co.zw">sales@jzconcrete.co.zw</a><span>Harare, Zimbabwe</span></div>
+        <div className="footer-social"><small>FOLLOW</small><a href="https://www.instagram.com/jzconcrete.co.zw?igsi=OHg5ajd2Y2s2bnZh" target="_blank" rel="noreferrer">Instagram <span>→</span></a><a href="https://www.facebook.com/share/1Eg2TbDwjy/" target="_blank" rel="noreferrer">Facebook <span>→</span></a></div>
         <div className="footer-bottom"><span>© 2026 J Z Concrete</span><span>Engineered to perform.</span></div>
       </footer>
     </main>
