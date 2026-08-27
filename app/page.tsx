@@ -347,7 +347,7 @@ export default function Home() {
 
       <section className="company-story reveal" id="about">
         <div><p className="section-tag">/ About J Z</p><h2>International engineering.<br /><span>Built for Zimbabwe.</span></h2></div>
-        <div className="story-copy"><p>Jianzhou Concrete brings production discipline, technical control and coordinated ready-mix delivery together for Zimbabwe’s building and infrastructure market.</p><ol><li><b>01</b><span>Production</span>Controlled batching and material management.</li><li><b>02</b><span>Verification</span>Laboratory-led checks before and during supply.</li><li><b>03</b><span>Delivery</span>Operations aligned to the project’s pour window.</li><li><b>04</b><span>Support</span>Technical guidance from selection to placement.</li></ol></div>
+        <div className="story-copy"><p>Jianzhou Concrete brings production discipline, technical control and coordinated ready-mix delivery together for Zimbabwe’s building and infrastructure market.</p><ol><li><b>01</b><span>Production</span><p>Controlled batching and material management.</p></li><li><b>02</b><span>Verification</span><p>Laboratory-led checks before and during supply.</p></li><li><b>03</b><span>Delivery</span><p>Operations aligned to the project’s pour window.</p></li><li><b>04</b><span>Support</span><p>Technical guidance from selection to placement.</p></li></ol></div>
       </section>
 
       <section className="why-jz reveal" id="why-jz">
