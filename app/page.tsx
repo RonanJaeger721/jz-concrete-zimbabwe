@@ -462,7 +462,7 @@ export default function Home() {
         <div><small>EXPLORE</small><a href="#products">Concrete systems</a><a href="#quality">Quality assurance</a><a href="#projects">Projects</a><a href="#knowledge">Knowledge centre</a></div>
         <div><small>CONTACT</small><a href="tel:+263774661555">Operations · +263 774 661 555</a><a href="mailto:operations@jzconcrete.co.zw">operations@jzconcrete.co.zw</a><a href="tel:+263776506885">Sales · +263 776 506 885</a><a href="mailto:sales@jzconcrete.co.zw">sales@jzconcrete.co.zw</a><span>Harare, Zimbabwe</span></div>
         <div className="footer-social"><small>FOLLOW</small><a href="https://www.instagram.com/jzconcrete.co.zw?igsi=OHg5ajd2Y2s2bnZh" target="_blank" rel="noreferrer">Instagram <span>→</span></a><a href="https://www.facebook.com/share/1Eg2TbDwjy/" target="_blank" rel="noreferrer">Facebook <span>→</span></a></div>
-        <div className="footer-bottom"><span>© 2026 J Z Concrete</span><span>Engineered to perform.</span></div>
+        <div className="footer-bottom"><span>© 2026 J Z Concrete</span><span>Engineered to perform.</span><a className="jaeger-credit" href="https://wa.me/263789937251" target="_blank" rel="noopener noreferrer">Website developed and published by Jaeger Media</a></div>
       </footer>
     </main>
   );
